@@ -18,10 +18,27 @@ if($loginGood)
     $password = $_SESSION['password'];
       $sql = "SELECT * FROM `user` WHERE `email` = '$username' AND `password` = '$password'";
     $result = mysqli_query($link, $sql);
+
+    //Create a session where we are going to store the users sellerId
     UserInfo($result, $link);
     echo "<h2>Activity Navigator</h1>";
     echo editNav();
     echo "<div id=\"activityCard\" name=\"activityCard\"> Activity Here</div>";
+
+    //Find the seller ID
+    $sql = "SELECT * 
+        FROM user, seller
+        WHERE user.userId = seller.userId
+        AND user.email = '$username' ";
+    $result = mysqli_query($link, $sql);
+
+    if(mysqli_num_rows($result)>0)
+    {
+        while($row = mysqli_fetch_assoc($result))
+        {
+            $_SESSION['sellerId'] = $row['sellerId'];
+        }
+    }
 }
 else
 {
@@ -41,7 +58,7 @@ function UserInfo($result, $link)
     $input_wrapper = "";
     $phone = "";
     $input_wrapper = "";
-    $userId= (int)$_SESSION['stud_number'];
+    $userId = "";
     $userName= "";
     if(mysqli_num_rows($result)>0)
     {
