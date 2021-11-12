@@ -1,78 +1,270 @@
-function createAuction()
-{
+// ----------------------------------------
+//GLOBAL VARIABLES FOR THE ENTIRE PROCESS 
+//========================================
+class Livestock{
+    constructor(){}
+    setLiveStoct(sex,breed,age,askAmount,endDate, timeout,bio) {
+        this.sex = sex;
+        this.breed = breed;
+        this.age = age;
+        this.askAmount = askAmount;
+        this.endDate = endDate;
+        this.timeOut = timeout;
+        this.bio = bio;
+    }
+    setSex(sex){
+        this.sex = sex;
+    }
+    getSex(){
+        var livestock = "";
+        livestock += this.sex;
+        livestock += this.breed;
+        livestock += this.age;
+        livestock += this.askAmount;
+        livestock += this.bio
+        return livestock;
+    }
+    setTimeout(time){
+        this.timeOut = time;
+    }
+    getTimeout(){
+        return this.timeOut;
+    }
+    getLiveStock(){
+        //Create an array here so that we can get the livestock that we have created.
+        //What is an array - and how are we going to be able to make sure that we can access this array - or rather how will php make sure that it can access this array ?
+        var livestock = new Array();
+        var startTime = new Date();
+        var vDate = startTime.getDate();
+        if(vDate < 10){
+            vDate = "0" + vDate;
+        }
+        startTime = startTime.toJSON();
+        startTime = startTime.replace("T", " ");
+        startTime = startTime.replace("Z", "");
+        this.startDate = startTime;
+
+        if(this.sex == 0){
+            this.sex = "M";
+        }
+        else{
+            this.sex = "F";
+        }
+        livestock.push(this.sex);
+        livestock.push(this.breed);
+        livestock.push(this.age);
+        livestock.push(this.askAmount);
+        livestock.push(this.startDate);
+        livestock.push(this.endDate);
+        livestock.push(this.timeOut);
+        livestock.push(this.bio);
+        return livestock;
+
+    }
+    //I think it would be best if we can get the livestock as a form of an array return
+}
+var timeUnit = 0;
+var timeOutValue = 0;
+var defaultActive = true;
+var livestock = new Livestock();
+var animalTypeArr = new Array();
+var varAnimalType = null;
+
+function animalType(){
+    //We need to get this directly from the database
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://localhost/dashboard/biddingsystem/users/admin/livestock/posts/postAnimalType.php', true);
+    xhr.onload = function(){
+        if(this.status = 200){
+            varAnimalType = JSON.parse(this.responseText);
+            //OUTPUT THE INFORMATION TO THE BROWSER
+            for(var i in varAnimalType){
+                animalTypeArr.push(varAnimalType[i].name);
+                //We need to now put these values inside an array - or rather we can amke use of the livestock
+            }
+        }
+    }
+    xhr.send();
+}
+//On call the XMLHttpRequest and get the animal type data
+window.addEventListener('load', animalType);
+
+function createAuction(){
     //We need to be able to make sure that we can upload videos using javascript or something
-    //Create a childiv and call the child Div createLiveStock   
+    //Create a childiv and call the child Div createLiveStock 
     var inputStyle = "input_";
     var buttonInput = "update_button";
     var activityCard = document.getElementById("activityCard");
-
     var createLiveStock = document.createElement('div');
     var breakElment = document.createElement('br');
     createLiveStock.id = "createLiveStock";
     createLiveStock.style = "";
     createLiveStock.innerHTML = "Create Live Stock";
     activityCard.appendChild(createLiveStock);
+    breakEl(createLiveStock);
+    breakEl(createLiveStock);
+    
+    //=====================
+    //Animal Type
+    //======================
+    createLiveStock.appendChild(createLabel("Choose Animal Type"));//Create label for the animal type
+    var v_animalType = createElement("animalType", inputStyle, "animalType", "animalType", "select", "text");//Create an animal type element
+    for(index in animalTypeArr){
+        v_animalType.options[v_animalType.options.length] = new Option(animalTypeArr[index], index);
+        //Add animal options - The options will be comming from an array called animalTypeArr this array is retrieved by use of AJAX from our database
+    }
+    v_animalType.addEventListener('change', changeAnimalBreed);//Create an event to update the animal breed when the animal type is been changed. - The options of the animal breed will be coming from the AJAX POST
+    breakEl(createLiveStock);
+    createLiveStock.appendChild(v_animalType);
     //Create input fields for stock information
     //The sex should validate on time - BUt we cannot ender the informatio so we are going to create a class since we cannot write the information directly into the database - So on exit we are going to input this information into the livestock class
-    breakEl(createLiveStock);
-    createLiveStock.appendChild(createLabel("Sex"));
-    breakEl(createLiveStock);
-    createLiveStock.appendChild(createElement("sex", inputStyle, "sex", "Sex", "input", "text"));
 
+    //=====================
+    //Animal Breed Element
+    //======================
     breakEl(createLiveStock);
-    createLiveStock.appendChild(createLabel("Breed"));
+    createLiveStock.appendChild(createLabel("Choose Animal Breed"));//By defaul animal breed should be same as the first value of the animalTypeArr --
     breakEl(createLiveStock);
-    createLiveStock.appendChild(createElement("breed", inputStyle, "breed", "Breed", "input", "text"));
+    var elBreed = createElement("breed", inputStyle, "breed", "breed", "select", "text");
+    createLiveStock.appendChild(elBreed);
+    breakEl(createLiveStock);//Break Elemnt
+    animalBreed();
 
-    breakEl(createLiveStock);
-    createLiveStock.appendChild(createLabel("Age"));
+    //=====================
+    //Animal SEX Element
+    //======================
+    const sexValues = ["Male", "Female"];
+    var sexElement = createElement("sex", inputStyle, "sex", "Sex", "select", "text")//Create Animal Sex Input element
+    for(index in sexValues){
+        sexElement.options[sexElement.options.length] = new Option(sexValues[index], index);
+    }
+    sexElement.addEventListener('change', testIfValue);//Add Event Lisenter - On change  TestIfValue
+    createLiveStock.appendChild(createLabel("Sex"));//Create the sex label
+    breakEl(createLiveStock);//Break line
+    createLiveStock.appendChild(sexElement);//Append the input sex element
+
+    //=====================
+    //Animal Age Element
+    //======================
+    breakEl(createLiveStock);//Break Line
+    createLiveStock.appendChild(createLabel("Age"));//Create an age label to complement the age input element
     breakEl(createLiveStock);
     createLiveStock.appendChild(createElement("age", inputStyle, "age", "Age", "input", "text"));
 
+    //=====================
+    //Auction Ask Amount
+    //======================
+    breakEl(createLiveStock);//Break Element
+    createLiveStock.appendChild(createLabel("Ask Amount"));//Create lable for ask amount input element
     breakEl(createLiveStock);
-    createLiveStock.appendChild(createLabel("Ask Amount"));
-    breakEl(createLiveStock);
-    createLiveStock.appendChild(createElement("askAmount", inputStyle, "askAmount", "Ask Amount", "input", "text"));
+    createLiveStock.appendChild(createElement("askAmount", inputStyle, "askAmount", "Ask Amount", "input", "text"));//Append ask amount input element to createlivestock div
 
-    breakEl(createLiveStock);
-    createLiveStock.appendChild(createLabel("Start Date"));
-    breakEl(createLiveStock);
-    createLiveStock.appendChild(createElement("startDate", inputStyle, "startDate", "Start Date", "input", "date"));
+    //=====================
+    //Auction end Date
+    //======================
+    breakEl(createLiveStock);//Break element
+    createLiveStock.appendChild(createLabel("End Date"));//Create Label for end date
+    breakEl(createLiveStock);//Break Element
+    var endDateInput = document.createElement("input");
+    endDateInput.type = "date";
+    endDateInput.id = "endDate";
+    endDateInput.required = true;
+    endDateInput.className = "input";
+    endDateInput.name = "endDate";
+    var myDate = new Date()
+    endDateInput.value = myDate.getDate();
+    endDateInput.addEventListener('change', validateEndDate);//Add event listener when the date is changed
+    createLiveStock.appendChild(endDateInput);//Append the end date input element to the createlivestock div
+    //We need to create a div - what if we can create a form and then have the contents of the form be be put into another form - something similar to inheritance where when we fill up a form we can take the informaiton adn then use the  informaiton into another form
+    //Timeout - This is set in minutes. As soon as an add is created I can have a timeout event - set out in minutes.
+    //This will be set in minutes, hours, days - WE should also show the user the how many days before the bid is going to close upon the point that the user enters the date.
+    //We are doing to have and upp and down arrow - the arrows will chagne the dates or the times - and then we are doing to have 
 
+    //===============================================================================
+    //Auction Time Out Elements
+    //Time out input element has buttons that allow the user to specify the timeout time unit -  
+    //The defult button sets the time out to the closing date of the bid
+    //=========================================================================
     breakEl(createLiveStock);
-    createLiveStock.appendChild(createLabel("End Date"));
+    createLiveStock.appendChild(createLabel("Time Out", "timeOutLabel"));//Time out label
     breakEl(createLiveStock);
-    createLiveStock.appendChild(createElement("endDate", inputStyle, "endDate", "End Date", "input", "date"));
+    createLiveStock.appendChild(createElement("timeOut", inputStyle, "timeOut", "Time Out", "input", "text"));
+    //Create a label that will be on the side the lable should let us know this is days or what.
+    //This lable will change based upon what the customer sets it to be - if the customer sets this to be a in hours the label should comply to that setting
+    createLiveStock.appendChild(createLabel("Minutes", "timeUnitLabel"));
+    var upButton = document.createElement('button');
+    upButton.addEventListener('click', changeTimeUnit);
+    upButton.id = "upButton";
+    upButton.className = "submit_button";
+    upButton.innerHTML = "+";
+    createLiveStock.appendChild(upButton);
+    //Create another button to bring the time unit down
+    var downButton = document.createElement('button');
+    downButton.addEventListener('click', changeTimeUnit);
+    downButton.id = "downButton";
+    downButton.className = "submit_button";
+    downButton.innerHTML = "-";
+    createLiveStock.appendChild(downButton);
+    //Make the vlue to be unset.
+    var unsetTimeOut = document.createElement('button');
+    unsetTimeOut.addEventListener('click', changeTimeUnit);
+    unsetTimeOut.id = "unsetTimeUnit";
+    unsetTimeOut.className = "update_button";
+    unsetTimeOut.innerHTML = "Default";
+    createLiveStock.appendChild(unsetTimeOut);
 
-    breakEl(createLiveStock);
-    createLiveStock.appendChild(createLabel("Time Out"));
-    breakEl(createLiveStock);
-    createLiveStock.appendChild(createElement("timeOut", inputStyle, "timeOut", "timeOut", "input", "date"));
-
+    //=====================
+    //Animal Bio
+    //======================
     breakEl(createLiveStock);
     createLiveStock.appendChild(createLabel("Bio"));
     breakEl(createLiveStock);
     createLiveStock.appendChild(createElement("bio", inputStyle, "bio", "Description of Livestock", "textarea", ""));
     breakEl(createLiveStock);
 
+    //=====================
+    //Upload Video Element
+    //======================
+    createLiveStock.appendChild(createElement("video", "", "video", "Select Video", "input", "file"));
     breakEl(createLiveStock);
     var button = document.createElement('button');
     button.addEventListener('click', insertAuction);
     button.id = "createAution";
     button.className = buttonInput;
+
+    //=====================
+    //Create Auction button
+    //======================
     button.innerHTML = "Create Auction";
     createLiveStock.appendChild(button);
 
-    function createLabel(caption)
-    {
+    //=====================
+    //Fuctions that enable us to quickly create elements
+    //Some other functions are overloaded
+    //======================
+    function createLabel(caption){
         var label = document.createElement('label');
         label.innerHTML = caption;
         return label;
     }
-
-
-    function createElement(elName, elStyle, elId, elPlaceholder, element, type)
-    {
+    function createLabel(caption, id){
+        var label = document.createElement('label');
+        label.innerHTML = caption;
+        label.id = id;
+        return label;
+    }
+    function createElement(elName, elStyle, elId, elPlaceholder, element, type, event, eventFunction){
+        var elInput = document.createElement(element);
+        elInput.id = elId, 
+        elInput.type = type;
+        elInput.required = true;
+        elInput.className = elStyle
+        elInput.placeholder = elPlaceholder;
+        elInput.name = elName;
+        elInput.addEventListener(event, eventFunction);
+        return elInput;
+    }
+    function createElement(elName, elStyle, elId, elPlaceholder, element, type){
         var elInput = document.createElement(element);
         elInput.id = elId, 
         elInput.type = type;
@@ -82,74 +274,217 @@ function createAuction()
         elInput.name = elName;
         return elInput;
     }
-    function breakEl(createLiveStock)
-    {
+    function breakEl(createLiveStock){
         return  createLiveStock.appendChild(document.createElement('br'));
     }
+    //This function is used to get the animal breed - the animal breed should come after the animal type has been created and populated - hence we are putting this function inside our create live stock function
+
+    function animalBreed(){
+        //But I need to make sure that I get the value of the first animal in the show.
+        console.log(document.getElementById("animalType").value);
+        // preventDefault();
+                // var name = document.getElementById('')
+                var xhr = new XMLHttpRequest();
+                var typeId = document.getElementById("animalType").value;
+                typeId = +typeId + +1;
+                var params = "typeId=" + typeId;
+                xhr.open('POST', 'http://localhost/dashboard/biddingsystem/users/admin/livestock/posts/postAnimalBreedWhere.php', true);
+                //Pass the information - but then again how can we get the request that we are looking for?
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.onload = function()
+                {
+                    //Get the main div that we are working on    
+                    //What do we have here?
+                    if(this.status = 200)
+                    {
+                        var breedArray = JSON.parse(this.responseText);
+
+                        var eldBreed = document.getElementById("breed");
+                        eldBreed.innerHTML = "";
+                        for(var i in breedArray)
+                        {
+                            //But we need to make an extra row - and then use this extra row to show students that are not grouped.
+                            eldBreed.options[eldBreed.options.length] = new Option(breedArray[i].name, i);
+                        }
+                    }
+                }
+                xhr.send(params);
+        //Create a post request and get the animal that you are looking for
+    }
 
 }
 
-class Livestock
+function testIfValue(){
+    alert(this.value);
+}
+
+
+
+function changeAnimalBreed(e)
 {
-    #sex= "";
-    #breed = "";
-    #age = "";
-    #askAmount = "";
-    #startDate;
-    #endDate;
-    #timeOut;
-    #bio;
 
-    // constructor(){}
-    
-    constructor(sex,breed,age,askAmount,startDate,endDate,timeOut,bio)
-    {
-        this.#sex = sex;
-        this.#breed = breed;
-        this.#age = age;
-        this.#askAmount = askAmount;
-        this.#startDate = startDate;
-        this.#endDate = endDate;
-        this.#timeOut = timeOut;
-        this.#bio = bio;
-    }
+    console.log(document.getElementById("animalType").value);
+    e.preventDefault();
+            // var name = document.getElementById('')
+            var xhr = new XMLHttpRequest();
+            var typeId = this.value;
+            typeId = +typeId + +1;
+            var params = "typeId=" + typeId;
+            xhr.open('POST', 'http://localhost/dashboard/biddingsystem/users/admin/livestock/posts/postAnimalBreedWhere.php', true);
+            //Pass the information - but then again how can we get the request that we are looking for?
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function()
+            {
+                //Get the main div that we are working on    
+                //What do we have here?
+                if(this.status = 200)
+                {
+                    var breedArray = JSON.parse(this.responseText);
 
-    setSex(sex)
-    {
-        this.#sex = sex;
-    }
-    getSex()
-    {
-        var livestock = "";
-        livestock += this.#sex;
-        livestock += this.breed;
-        livestock += this.age;
-        livestock += this.askAmount;
-        return livestock;
-    }
-
+                    var eldBreed = document.getElementById("breed");
+                    eldBreed.innerHTML = "";
+                    for(var i in breedArray)
+                    {
+                        //But we need to make an extra row - and then use this extra row to show students that are not grouped.
+                        eldBreed.options[eldBreed.options.length] = new Option(breedArray[i].name, i);
+                    }
+                }
+            }
+            xhr.send(params);
+    //Create a post request and get the animal that you are looking for
 
 }
 
+var timeOutElement =  document.getElementById("timeOut");
+
+function validateEndDate()
+{
+    var consoleValue = "Good";
+    var endDate = new Date(document.getElementById("endDate").value);
+    var today  = new Date();
+    var startYear = today.getFullYear();
+    var startMonth = today.getMonth() + +1;
+    var startDay = today.getDate();
+    var endDateMonth = endDate.getMonth() + +1;
+    if(startDay < 10){
+        startDay = "0" + startDay;
+    }
+    var strToday = startYear + "-" + startMonth + "-" + startDay;
+    if(endDate.getFullYear() < startYear){
+        consoleValue = "Invalid Year";
+        document.getElementById("endDate").value = strToday;
+        
+    }
+    else
+    {
+        if(endDateMonth < startMonth && endDate.getFullYear() == startYear)
+        {
+            consoleValue = "Invalid Month";
+            document.getElementById("endDate").value = strToday;
+        }
+        else
+        {
+            if(endDate.getDate() < startDay && endDateMonth == startMonth)
+            {
+                consoleValue = "Invalid Day";
+                document.getElementById("endDate").value = strToday;
+            }
+        }
+    }    
+    console.log(consoleValue);
+}
+
+function changeTimeUnit()
+{
+    //----------------
+    // Variables Here
+    //----------------
+    //If the add button get clicked change the time unit into something else.
+    //Now we need incrememnt the time.
+
+    var timeUnitCaption = ["Minutes", "Hours", "Days", "Weeks"];//If someone enters more days than a week we need to mke
+    var timeUnitMultimple = [1, 60, 1440, 10080];
+    var timeUnitLabel = document.getElementById("timeUnitLabel");
+    // var timeOutValue =  document.getElementById("timeOut").value;
+    timeOutValue =  document.getElementById("timeOut").value;
+    timeUnitLabel.innerHTML = timeUnitCaption[timeUnit];
+    // livestock.setTimeout(timeOutValue);
+
+    if(this.id == "unsetTimeUnit" && defaultActive){
+        //Disable all the other elements - that are within this space.
+        document.getElementById("upButton").disabled = true;
+        document.getElementById("upButton").className = "back_button";
+        document.getElementById("downButton").disabled = true;
+        document.getElementById("downButton").className = "back_button";
+        //Everything to default.
+        timeUnitLabel.innerHTML = "Default";
+        defaultActive = false;
+        
+    }
+    else if(this.id == "unsetTimeUnit" && !defaultActive){
+        //Disable all the other elements - that are within this space.
+        document.getElementById("upButton").disabled = false;
+        document.getElementById("upButton").className = "submit_button";
+        document.getElementById("downButton").disabled = false;
+        document.getElementById("downButton").className = "submit_button";
+        //Everything to default.
+        timeUnitLabel.innerHTML = timeUnitCaption[timeUnit];
+        defaultActive = true;
+    }
+
+    if(this.id == "upButton"){
+        if(timeUnit < 3)
+        {
+            timeUnit++;
+            //Now we need to make sure that we can then move on to displaying the information as we need to have it be.
+            timeUnitLabel.innerHTML = timeUnitCaption[timeUnit];
+            timeOutValue *= timeUnitMultimple[timeUnit];
+        }
+        else{
+            timeOutValue *= timeUnitMultimple[timeUnit];
+        }
+        console.log(timeOutValue + " " + timeUnitCaption[timeUnit] + " | Time Unit = " + timeUnit);
+    }
+
+    if(this.id == "downButton"){
+        if(timeUnit > 0){
+            timeUnit--;
+            timeOutValue *= timeUnitMultimple[timeUnit];
+            timeUnitLabel.innerHTML = timeUnitCaption[timeUnit];
+        }
+        else{
+            timeOutValue *= timeUnitMultimple[timeUnit];
+        }
+        console.log(timeOutValue + " " + timeUnitCaption[timeUnit] + " | Time Unit = " + timeUnit);
+    }
+
+    if(timeUnit == 0 && document.getElementById("timeOut").value <= 3){
+        //Make sure that you set the time to atleast 5 Minutes
+        document.getElementById("timeOut").value = 5;
+        document.getElementById("timeOutLabel").innerHTML = "Time Out set to default 5 minutes";
+    }
+    else{
+        document.getElementById("timeOutLabel").innerHTML = "Time Out";
+    }
+    // livestock.setTimeout(timeOutValue);
+}   
 
 function insertAuction()
 {
 
+    //our params here should be our information - Now this information here is livestock we need all this information about our livestock
+    alert(document.getElementById("bio").value);
     //Now we can get all the values of the items taht we desire to get.
-    alert(document.getElementById("sex").value);
-    let livestock = new Livestock(document.getElementById("sex").value, document.getElementById("breed").value, document.getElementById("age").value, document.getElementById("askAmount").value);
-    alert(livestock.getSex());
-
-    // sex
-    // breed
-    // age
-    // askAmount
-    // startDate
-    // endDate
-    // timeOut
-    // bio
-    //We need to make sure that we can get all the information that we need and then from there we need to insert into the database.
-
+    livestock.setLiveStoct(document.getElementById("sex").value, document.getElementById("breed").value, document.getElementById("age").value, document.getElementById("askAmount").value, document.getElementById("endDate").value, timeOutValue, document.getElementById("bio").value);
+    var xhr = new XMLHttpRequest();
+    var livestockArray = livestock.getLiveStock();
+    // var params = "livestock=" + JSON.stringify(livestockArray);
+    var params = "livestock=" + JSON.stringify(livestockArray);
+    xhr.open('POST', 'http://localhost/dashboard/biddingsystem/users/admin/livestock/insert.php', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send(params);
+    //Get this information and then you need to take this information and insert the information to the database
+    //WE will be making use of AJAX for this part
 }
 
 //We need to start affresh to make sure that we are going to work on this properly
@@ -166,7 +501,6 @@ function verify_delete()
 {
     //We can also get the students details if we want do
     var answer = confirm("Are you Sure you want to delete " + "\nThis cation cannot be reversed");
-    //var result = "";
     if(answer)
     {
         //Then proceed to deleting this person -- I am sure that we set the relevant things to deleting this person
@@ -1040,7 +1374,7 @@ function deleteRow(buttonID)
 //         signup_labels.lbl_password2 = "Password Does not Match";
 //     }
 // }
-// var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+// var format = /[ `!@$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 // document.write(format.test("My@string-with(some%text)") + "<br/>");
 // document.write(format.test("My string with spaces") + "<br/>");
 // document.write(format.test("MyStringContainingNoSpecialChars"));
@@ -1049,10 +1383,10 @@ var x = document.getElementById("pword1");
 undefined
 x.value;
 'Shiko'
-    var format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    var format = /[`!@$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 undefined
 format;
-/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/
+/[`!@$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/
 format.test(x.value);
 false
 x.value = "9900xxw2&2!!";
@@ -1108,7 +1442,7 @@ function checkPassword(pword, lblPword)
     {  
         //Check if the password is strong or weak
         //Check if special characters are there.
-        var specialCharFormat = /[`!@#$%^&* ()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+        var specialCharFormat = /[`!@$%^&* ()_+\-=\[\]{};':"\\|,.<>\/?~]/;
         var numFormat = /[012345789]/;
         var alphaFormat = /[a-zA-Z]/i;
         if(alphaFormat.test(password.value))   
@@ -1157,7 +1491,7 @@ function validateName(nameID, lblID)
     // alert(nameID);
     var lblName = document.getElementById(lblID);
     fname.value = fname.value.trim();
-    var specialCharFormat = /[`!@#$%^&* ()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    var specialCharFormat = /[`!@$%^&* ()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     var numFormat = /[012345789]/;
     // var alphaFormat = /[a-zA-Z]/i;
     if(specialCharFormat.test(fname.value) || numFormat.test(fname.value))   
@@ -1214,86 +1548,7 @@ function validateName(nameID, lblID)
 }
 //1 Get the two gender elements
 //2 Make sure that the genders do actually match - So then we can call this function throughout.
-// Hi there how are you 
-
-function validatePhone()
-{
-
-    function invalidPhone(lblPhone)
-    {
-        //Pone number should not contain anything but number.
-        lblPhone.style.color = "red";
-        lblPhone.innerText = "Invalid Phone Number";
-    }
-
-    var specialCharFormat = /[`!@#$%^&* ()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    var alphaFormat = /[a-zA-Z]/i;
-    //The first digit should be a zero- 
-    //The second digits should can be anything really 
-    //This should only be numbers
-    var phone = document.getElementById("phone");
-    phone.value  = phone.value.trim();
-    var lblPhone = document.getElementById("lblPhone");
-    if(phone.value.length != 0)
-    {
-        //Phone
-        //Ensure that the first value is a zero
-        if(phone.value[0] != 0)
-        {
-            //Invalid phone number phone should start with 0
-            invalidPhone(lblPhone);
-        }
-        else
-        {
-            //Make sure that the second digit is not 0
-            //Make sure that the phone number does not include a non number value
-            //We have already trimmed the string now we need to make sure that we 
-            if(specialCharFormat.test(phone.value) || alphaFormat.test(phone.value))
-            {
-
-                invalidPhone(lblPhone);
-            }
-            else
-            {
-                if(phone.value.length != 10)
-                {
-                    invalidPhone(lblPhone);
-                }
-                else if(phone.value[1] != 0)
-                {
-                    lblPhone.style.color = "green";
-                    lblPhone.innerText = "Phone Number";                   
-                }
-            }
-
-            // if(!checkIDString(phone.value))
-            // {
-            //     //Pone number should not contain anything but number.
-            //     invalidPhone(lblPhone);
-            // }
-            // else if(phone.value.length != 10)
-            // {
-            //     //Pone number should not contain anything but number.
-            //     invalidPhone(lblPhone);
-            // }
-            // else
-            // {
-            //     //Pone number should not contain anything but number.
-            //     if(phone.value[1] != 0)
-            //     {
-            //         lblPhone.style.color = "green";
-            //         lblPhone.innerText = "Phone Number";
-            //     }
-            // }
-        }
-    }
-    else
-    {
-        lblPhone.style.color = "red";
-        lblPhone.innerText = "Phone Number Empty";
-    }
-}
-
+// Hi there how are you
 
 
 function validate_id()
@@ -1308,7 +1563,7 @@ function validate_id()
     var gender = "";
     id_nr.value  = id_nr.value.trim();
 
-    var specialCharFormat = /[`!@#$%^&* ()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    var specialCharFormat = /[`!@$%^&* ()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     var numFormat = /[012345789]/;
     var alphaFormat = /[a-zA-Z]/i;
     if(alphaFormat.test(id_nr.value) || specialCharFormat.test(id_nr.value))

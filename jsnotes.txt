@@ -1,0 +1,6 @@
+    //The start date will be auto incremented or rather this date will be created automatically because a user cannot say when it should start.
+    //By defaul the end date should be from tomorrow or rather one day.
+    // breakEl(createLiveStock);
+    // createLiveStock.appendChild(createLabel("Start Date"));
+    // breakEl(createLiveStock);
+    // createLiveStock.appendChild(createElement("startDate", inputStyle, "startDate", "Start Date", "input", "date"));

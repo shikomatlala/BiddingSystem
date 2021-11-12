@@ -6,6 +6,7 @@ $username = "root";
 $servername = "localhost";
 
 echo "We are connected";
+$_SESSION['sellerId'];
 
 //CREATE SESSION VARIABLES
 //echo ($_SERVER['REQUEST_URI']); //The reason why I did this echo was to test if the $_SERVER['REQUEST_URI']; works
@@ -50,7 +51,7 @@ function header_html_($style_link)
         <meta charset=\"utf-8\" />
         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
         <link rel=\"stylesheet\" href=\"$style_link\" />
-        <title>Grouping System</title>
+        <title>Bidding System</title>
         <meta charset=\"UTF-8\" />
     </head>
     <body>
@@ -88,7 +89,7 @@ function header_html($style_link)
         <meta charset=\"utf-8\" />
         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
         <link rel=\"stylesheet\" href=\"$style_link\" />
-        <title>Grouping System</title>
+        <title>Bidding System</title>
         <meta charset=\"UTF-8\" />
     </head>
     <body>
