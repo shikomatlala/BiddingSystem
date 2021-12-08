@@ -1,0 +1,31 @@
+LOGIN PROCESS
+In the start of our system, we are going to show the user their homepage.
+Or rather the way that we have created it here is that when the user starts with the page they should firstly start by logging in, and once they are logged in, they should move on to the next step where they are going to see their home page.
+But before we start there we need to understand what process does what.
+
+The first process that we have is the login process.
+Here we are going to allow the user to login to the system - 
+To do so we want to create a login process.
+Once we are done loggin we are going to return back to the login page or rather if  the loggin has been successful we are going to take out use to the relevant page.
+
+But ye again since we are login in once, why should we create a process to log it?
+
+During the login part we have a component that we use to login, this component carries a login html form - We are then able to use this form and get our data to be sent where we need.
+
+The one goal that I have is to avoid taking an individual inside the system if they do not have an account yet
+They should always work outisde the system and only go inside the system when they have an account.
+
+
+new terms in calculus
+quotient = The quotient  is the number obtained by dividing one number by another.
+compute
+distribute
+parenthesis = ()
+The entire expression in the parenthesis is squared
+
+
+
+CREATE AUCTION
+today the goal is to create an auction and one of the things that I came to learn is that in creating an auction, one needs to be be able.
+What information do we need from the user about the auction.
+This information is the livestock information.
