@@ -1,11 +1,25 @@
-window.addEventListener('load', animalType);
-// window.addEventListener('load', loadAnimalTypeData);
+window.addEventListener('load', main);
 
+function main()
+{
+    createAuctionInterface();
+}
 
-var animalTypeArr = new Array();
-var varAnimalType = null;
-function animalType(){
-    //We need to get this directly from the database
+var selectElClass = "";
+var actionButtonClass = "";
+var txtInputClass = "";
+
+function createAuctionInterface()
+{
+
+    var animalTypeArr = new Array();
+    var varAnimalType;
+    //=====================
+    //Animal Type
+    //======================
+    //Variables and AJAX requests
+    var animalTypeDiv = document.getElementById("animalTypeDiv");
+    var inputAnimalType = createElement("inputAnimalType", selectElClass, "inputAnimalType", "", "select", "text");//Create an animal type element  
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'http://localhost/dashboard/biddingsystem/user/auction/createAuction/component/api/getAnimalType.php', true);
     xhr.onload = function(){
@@ -14,24 +28,33 @@ function animalType(){
             //OUTPUT THE INFORMATION TO THE BROWSER
             for(var i in varAnimalType){
                 animalTypeArr.push(varAnimalType[i].name);
+                console.log(varAnimalType[i].name);
+                inputAnimalType.options[inputAnimalType.options.length] = new Option(varAnimalType[i].name, i);
                 //We need to now put these values inside an array - or rather we can amke use of the livestock
             }
         }
     }
     xhr.send();
-    loadAnimalTypeData(varAnimalType);
+    inputAnimalType.addEventListener('click', changeAnimalBreed);//Create an event to update the animal breed when the animal type is been changed. - The options of the animal breed will be coming from the AJAX POST
+    animalTypeDiv.appendChild(inputAnimalType);
 }
 
 
-function loadAnimalTypeData(varAnimalType)
+function changeAnimalBreed()
 {
-    console.log("Hi there");
-    alert("Welcome");
-    var selectAnimalType = document.getElementById("inputAnimalType");
-    console.log(selectAnimalType);
-    console.log(varAnimalType);
-    for(var index in varAnimalType){
-        selectAnimalType.options[selectAnimalType.options.length] = new Option(varAnimalType[index++], index);
-    }
+    console.log(document.getElementById("inputAnimalType").text);
+}
 
+
+
+
+function createElement(elName, elStyle, elId, elPlaceholder, element, type){
+    var elInput = document.createElement(element);
+    elInput.id = elId, 
+    elInput.type = type;
+    elInput.required = true;
+    elInput.className = elStyle
+    elInput.placeholder = elPlaceholder;
+    elInput.name = elName;
+    return elInput;
 }

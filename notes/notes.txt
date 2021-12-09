@@ -29,3 +29,6 @@ CREATE AUCTION
 today the goal is to create an auction and one of the things that I came to learn is that in creating an auction, one needs to be be able.
 What information do we need from the user about the auction.
 This information is the livestock information.
+
+
+daily credit coorporation
