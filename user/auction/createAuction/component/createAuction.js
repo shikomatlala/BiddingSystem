@@ -19,7 +19,7 @@ function createAuctionInterface()
     //======================
     //Variables and AJAX requests
     var animalTypeDiv = document.getElementById("animalTypeDiv");
-    var inputAnimalType = createElement("inputAnimalType", selectElClass, "inputAnimalType", "", "select", "text");//Create an animal type element  
+    var selectAnimalType = createElement("selectAnimalType", selectElClass, "selectAnimalType", "", "select", "text");//Create an animal type element  
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'http://localhost/dashboard/biddingsystem/user/auction/createAuction/component/api/getAnimalType.php', true);
     xhr.onload = function(){
@@ -29,20 +29,55 @@ function createAuctionInterface()
             for(var i in varAnimalType){
                 animalTypeArr.push(varAnimalType[i].name);
                 console.log(varAnimalType[i].name);
-                inputAnimalType.options[inputAnimalType.options.length] = new Option(varAnimalType[i].name, i);
+                selectAnimalType.options[selectAnimalType.options.length] = new Option(varAnimalType[i].name, varAnimalType[i].typeId);
                 //We need to now put these values inside an array - or rather we can amke use of the livestock
             }
         }
     }
     xhr.send();
-    inputAnimalType.addEventListener('click', changeAnimalBreed);//Create an event to update the animal breed when the animal type is been changed. - The options of the animal breed will be coming from the AJAX POST
-    animalTypeDiv.appendChild(inputAnimalType);
+    selectAnimalType.addEventListener('change', changeAnimalBreed);//Create an event to update the animal breed when the animal type is been changed. - The options of the animal breed will be coming from the AJAX POST
+    animalTypeDiv.appendChild(selectAnimalType);
+    //=======================
+    //Animal breed
+    //===============
+    var animalBreedDiv = document.getElementById("animalBreedDiv");
+    var selectAnimalBreed = createElement("selectAnimalBreed", selectElClass, "selectAnimalBreed", "", "select", "text");
+    selectAnimalBreed.options[selectAnimalBreed.options.length] = new Option("Brahman", "1");
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '')
+    animalBreedDiv.appendChild(selectAnimalBreed);
+    console.log(selectAnimalBreed);
 }
 
-
-function changeAnimalBreed()
+function changeAnimalBreed(e)
 {
-    console.log(document.getElementById("inputAnimalType").text);
+
+    console.log(document.getElementById("selectAnimalType").value);
+    e.preventDefault();
+    var xhr = new XMLHttpRequest();
+    var typeId = this.value;
+    var params = "typeId=" + typeId;
+    xhr.open('POST', 'http://localhost/dashboard/biddingsystem/user/auction/createAuction/component/api/getAnimalBreed.php', true);
+    //Pass the information - but then again how can we get the request that we are looking for?
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onload = function()
+    {
+        //Get the main div that we are working on    
+        //What do we have here?
+        if(this.status = 200)
+        {
+            var breedArray = JSON.parse(this.responseText);
+
+            var selectAnimalBreed = document.getElementById("selectAnimalBreed");
+            selectAnimalBreed.innerHTML = "";
+            for(var i in breedArray)
+            {
+                //But we need to make an extra row - and then use this extra row to show students that are not grouped.
+                selectAnimalBreed.options[selectAnimalBreed.options.length] = new Option(breedArray[i].name, breedArray[i].breedId);
+            }
+        }
+    }
+    xhr.send(params);
 }
 
 

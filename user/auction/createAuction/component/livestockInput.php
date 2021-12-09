@@ -1,3 +1,6 @@
+        
+        <h1 class="">Create Auction</h1>
+
         <script src="component/createAuction.js"></script>
         <div id="createAuctionDiv" class="">
             <div id="animalTypeDiv" class="">
@@ -9,7 +12,7 @@
 
             <div id="animalSexDiv" class="">
                 <lablel for="selectAnimalSex" class="" name="lblAnimalSex" id="lblAnimalSex">Choose Animal Sex</label><br> 
-                <select id="selectAnimalSex" required="" class="" name="selectAnimalSex">
+                <select id="selectAnimalSex" required class="" name="selectAnimalSex">
                     <option value="0">Male</option>
                     <option value="1">Female</option>
                 </select>
@@ -17,13 +20,13 @@
 
             <div id="animalNameDiv" class="">
                 <lablel for="inputAnimalName" class="" name="lblAnimalName" id="lblAnimalName">Enter Animal Name</label><br> 
-                <input class="" type="text" id="inputAnimalName" name="inputAnimalName" placeholder="Livestock Name" required="">
+                <input class="" type="text" id="inputAnimalName" name="inputAnimalName" placeholder="Livestock Name" required>
             </div>
 
             <div id="animalAgeDiv" class="">
                 <lablel for="inputAnimalAge" class="" name="lblAnimalAge" id="lblAnimalAge">Enter Animal </label><br> 
-                <input class="" type="text" id="inputAnimalAge" name="inputAnimalAge" placeholder="Age" required="">
-                <select id="selectAnimalAge" required="" class="" name="selectAnimalAge">
+                <input class="" type="text" id="inputAnimalAge" name="inputAnimalAge" placeholder="Age" required>
+                <select id="selectAnimalAge" required class="" name="selectAnimalAge">
                     <option value="1">Day(s)</option>
                     <option value="2">Week(s)</option>
                     <option value="3">Month(s)</option>
@@ -33,7 +36,7 @@
 
             <div id="animalWeightDiv" class="">
                 <lablel for="inputAnimalWeight" class="" name="lblAnimalWeight" id="lblAnimalWeight">Enter Animal Weight | Measured in kg.</label><br> 
-                <input class="" type="text" id="inputAnimalWeight" name="inputAnimalWeight" placeholder="eg. 2.4" required="">
+                <input class="" type="text" id="inputAnimalWeight" name="inputAnimalWeight" placeholder="eg. 2.4" required>
             </div>
 
             <div id="animalBioDiv" class="">
@@ -43,14 +46,21 @@
 
             <div id="askAmountDiv" class="">
                 <lablel for="askAmount" class="" name="lblAskAmount" id="lblAskAmount">Enter Ask Amount</label><br> 
+                <input class="" type="text" id="askAmount" name="askAmount" placeholder="eg. 2.4"  pattern="[0-9.]" required>
             </div>
 
             <div id="startDateDiv" class="">
                 <lablel for="startDate" class="" name="lblStartDate" id="lblStartDate">Choose Start Date</label><br> 
+                <input class="" type="datetime-local" id="startDate" name="startDate" onchange="validateStartDate()" required>
+
             </div>
 
             <div id="endDateDiv" class="">
                 <lablel for="endDate" class="" name="lblEndDate" id="lblEndDate">Choose End Date</label><br> 
+                <input class="" type="datetime-local" id="startDate" name="startDate" onchange="validateEndDate()" required>
+
             </div>
         <div>
+
+        
         

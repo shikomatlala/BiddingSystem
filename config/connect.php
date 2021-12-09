@@ -35,7 +35,7 @@
     }
     $js_file .= "javascript/index.js";  
     $css_file .= "style/index.css";
-    $ico_file .= "media/icon/index.ico";
+    $ico_file .= "media/icon/index.png";
     // echo $js_file . "<br>";
     // echo $css_file;
     $out = "<!DOCTYPE html>\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">";
@@ -43,7 +43,7 @@
     <head>
         <meta charset=\"utf-8\" />
         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
-        <link rel=\"icon\" href=\"$ico_file\" type =\"image/x-icon\">
+        <link rel=\"icon\" href=\"$ico_file\" type =\"image/png/x-icon\">
         <link rel=\"stylesheet\" href=\"$css_file\" />
         <title>Bidding System</title>
         <meta charset=\"UTF-8\" />
