@@ -1,6 +1,6 @@
 
 
-l79fIrV%@18E
+-- l79fIrV%@18E
 
 DROP DATABASE biddingsystem;
 
@@ -125,7 +125,7 @@ CREATE TABLE `livestock`
 (
     `stockId` INT(11) PRIMARY KEY AUTO_INCREMENT,
     `sex` CHAR(1) NOT NULL,
-    `name` VARCHAR(255) NOT NULL,
+    `livestockName` VARCHAR(255) NOT NULL,
     `breedId` INT(11) NOT NULL, 
     `age` INT(3) NOT NULL, 
     `ageType` VARCHAR(10) NOT NULL,

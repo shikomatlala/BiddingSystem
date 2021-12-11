@@ -5,7 +5,6 @@
     $password = "";
     $username = "root";
     $servername = "localhost";
-    $_SESSION['sellerId'] = 0;
 
     //CREATE SESSION VARIABLES
     $link = mysqli_connect($servername, $username, $password, $database);

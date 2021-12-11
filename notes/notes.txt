@@ -32,3 +32,46 @@ This information is the livestock information.
 
 
 daily credit coorporation
+
+
+   $targetDir = "api/";
+    $targetFile = $targetDir . basename($_FILES["uploadVideo"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+
+
+            // $check = getimagesize($_FILES["uploadVideo"]["tmp_name"]);
+        // if($check !==false){
+        //     echo "file is an image - " . $check["mime"] . ".";
+        //     $uploadOk = 1;
+        // }else{
+        //     echo "File is not an image.";
+        //     $uploadOk =0;
+        // }
+        // if ($uploadOk == 0) {
+        //     echo "Sorry, your file was not uploaded.";
+        //   // if everything is ok, try to upload file
+        //   } else {
+          if (move_uploaded_file($_FILES["uploadVideo"]["tmp_name"], $targetFile)) {
+            echo "The file ". htmlspecialchars( basename( $_FILES["uploadVideo"]["name"])). " has been uploaded.";
+          } 
+          else 
+          {
+            echo "Sorry, there was an error uploading your file.";
+          }
+
+
+          SELECT * FROM `user`, `seller`, `buyer` WHERE `email` = 'shikomatlala@gmail.com' AND `password` = '3THJ3n24pzWR7LR'
+
+SELECT * FROM `livestock` WHERE sellerId = 3
+
+SELECT * FROM `livestock` a, `breed` b, `animalType` c WHERE sellerId = 3
+AND a.breedId = b.breedId
+AND b.typeId = c.typeId;
+
+
+
+SELECT stockId, sex, livestockName, age, ageType, weight, askamount, startdate, enddate, bio, b.name as breedName, c.name as animalTypeName
+FROM `livestock` a, `breed` b, `animalType` c WHERE sellerId = 1
+AND a.breedId = b.breedId
+AND b.typeId = c.typeId
