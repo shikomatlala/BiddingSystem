@@ -1,6 +1,6 @@
 <?php
-    include_once "../component/navbar.php";
     include_once "../../config/connect.php";
+    include_once "../component/navbar.php";
     // include_once "component/function.php";
 
     //Create a way for our person to be able to view all of his auctions - But what is most important is that our user should complete their auction.
@@ -14,6 +14,13 @@
     AND a.breedId = b.breedId
     AND b.typeId = c.typeId
     ORDER BY stockId DESC";
+//     SELECT a.stockId, sex, livestockName, age, ageType, weight, askamount, startdate, enddate, bio, b.name as breedName, c.name as animalTypeName 
+//      FROM `livestock` a, `breed` b, `animalType` c, `livestockvideo` d
+//      WHERE sellerId <> 2 
+// 	        AND a.breedId = b.breedId 
+//          AND b.typeId = c.typeId 
+//          AND d.stockId = a.stockId
+//      ORDER BY stockId DESC;
 
     //Once I have selected all of them I want to create a way of showing what I need to have.
     $countAuctions = "SELECT COUNT(stockId) as countMyAuction FROM `livestock` WHERE sellerId = $sellerId";
@@ -23,6 +30,7 @@
         while($row = mysqli_fetch_assoc($countResult)){
             $numOfAuctions = (int)$row['countMyAuction'];
         }
+
     }
     $livestockId = 0;
     $result = mysqli_query($link, $sql);
@@ -73,10 +81,15 @@
             $videoName = "";
             $videoHtml = "";
             if(mysqli_num_rows($checkVideoResult) > 0){
-                $statusValue = "Auction Created";
+                $statusValue = "Active for Bids";
+                //Now we need to know the time that the bid is valid or not
+                //If a bid is not longer valid then we need to let the use know that the bid is not loger valid
+                //If a bid has not yet started it should be put to a waiting list
+                //But for now we want to be able to bid.
                 //Create a display to show the video which we have created.
+                //Let us start to allow the users to be able to bid
                 while($videoRow = mysqli_fetch_assoc($checkVideoResult)){
-                    $videoName = "video/" . $videoRow['locationString'];
+                    $videoName = "../auction/myAuction/video/" . $videoRow['locationString'];
                 }
 
                 // $myfile = fopen($videoName, "r") or die("Unable to open file!");//Rather that do this I can just open a video
@@ -101,6 +114,10 @@
 
         }
        
+    }
+    else
+    {
+        echo "Something is wrong";
     }
     echo $attendanceRoll;
 

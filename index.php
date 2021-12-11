@@ -9,7 +9,7 @@
         $_SESSION['password'] = $password;
         $_SESSION['email'] = $username;
         //   $sql = "SELECT * FROM `user`, `seller`, `buyer` WHERE `email` = '$username' AND `password` = '$password'";
-        $sql = "SELECT * FROM `user`, `seller`, `buyer`WHERE `email` = \"shikomatlala@gmail.com\" AND `password` = '3THJ3n24pzWR7LR' AND `user`.`userId` = `seller`.`userId` AND `user`.`userId` = `buyer`.`userId`";
+        $sql = "SELECT * FROM `user`, `seller`, `buyer`WHERE `email` = \"$username\" AND `password` = '$password' AND `user`.`userId` = `seller`.`userId` AND `user`.`userId` = `buyer`.`userId`";
         $result = mysqli_query($link, $sql);
         if(mysqli_num_rows($result)>0){
             while($row = mysqli_fetch_assoc($result)){
