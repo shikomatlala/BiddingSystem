@@ -8,7 +8,9 @@
         $password = $_POST['password'];
         $_SESSION['password'] = $password;
         $_SESSION['email'] = $username;
-          $sql = "SELECT * FROM `user` WHERE `email` = '$username' AND `password` = '$password'";
+        //   $sql = "SELECT * FROM `user`, `seller`, `buyer` WHERE `email` = '$username' AND `password` = '$password'";
+        $sql = "SELECT * FROM `user`, `seller`, `buyer`WHERE `email` = \"$username\" AND `password` = '$password' AND `user`.`userId` = `seller`.`userId` AND `user`.`userId` = `buyer`.`userId`";
+        // echo $sql;
         $result = mysqli_query($link, $sql);
         if(mysqli_num_rows($result)>0){
             while($row = mysqli_fetch_assoc($result)){
@@ -19,6 +21,9 @@
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['password'] = $row['password'];
                 $_SESSION['cAddress'] = $row['cAddress'];
+                $_SESSION['sellerId'] = $row['sellerId'];
+                $_SESSION['buyerId'] = $row['buyerId'];
+                $_SESSION['status'] = $row['status'];
             }   
             header("location: user");
         }

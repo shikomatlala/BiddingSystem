@@ -1,38 +1,40 @@
 <?php   
-    include_once "api/connect.php";
+    include_once "../../../../config/connect.php";
 
-    $targetDir = "uploads/";
-    $targetFile = $targetDir;
-    basename($_FILES["uploadVideo"]["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
-    if(isset($_POST['createAuctionButton']))
-    {
-
-        getimagesize($_FILES["uploadVideo"]["tmp_name"]);
-        if($check !==false){
-            echo "file is an image - " . $check["mime"] . ".";
-            $uploadOk = 1;
-        }else{
-            echo "File is not an image.";
-            $uploadOk =0;
+    if(isset($_POST['createAuctionButton'])){
+      $password = $_SESSION['password'];
+      $username = $_SESSION['email'];
+      $sellerId = 0;
+      $sql = "SELECT `sellerId` FROM `user` , `seller` WHERE `email` = '$username' AND `password` = '$password'";
+      $result = mysqli_query($link, $sql);
+      if(mysqli_num_rows($result) > 0){
+        while($row = mysqli_fetch_assoc($result)){
+          //When I get the user Id I now need to get the user's seller Id.
+          $sellerId =  (int)$row['sellerId'];
         }
+      }
+      $_SESSION['sellerId'] = $sellerId;
+      $breedId = (int)$_POST['selectAnimalBreed'];
+      $sex = $_POST['selectAnimalSex'];
+      $name = $_POST['inputAnimalName'];
+      $age = (int)$_POST['inputAnimalAge'];
+      $ageType = $_POST['selectAnimalAge'];
+      $weight = $_POST['inputAnimalWeight'];
+      $animalBio = $_POST['inputAnimalBio'];
+      $askAmount = $_POST['askAmount'];
+      $startDate = $_POST['startDate'];
+      $endDate = $_POST['endDate'];
 
+      $sql = "INSERT INTO `livestock` ( `sex`, `livestockName`, `breedId`, `age`, `ageType`, `weight`, `sellerId`, `askamount`, `startdate`, `enddate`, `bio`) VALUES ('$sex', '$name', $breedId, $age, '$ageType', $weight, $sellerId, $askAmount , '$startDate', '$endDate', \"$animalBio\")";
+      //Create Open up another page where the user is going to upload their video
+      if(mysqli_query($link, $sql)){
+        header("Location: ../../myAuction");
+      }
+      else
+      {
 
-        $breedId = (int)$_POST['selectAnimalBreed'];
-        $sex = $_POST['selectAnimalSex'];
-        $name = $_POST['inputAnimalName'];
-                
-        $age = (int)$_POST['inputAnimalAge'];
-        $ageType = $_POST['selectAnimalAge'];
-        $weight = $_POST['inputAnimalWeight'];
-        $animalBio = $_POST['inputAnimalBio'];
-        $askAmount = $_POST['askAmount'];
-        $startDate = $_POST['startDate'];
-        $endDate = $_POST['endDate'];
-
-        $sql = "INSERT INTO `livestock` ( `sex`, `name`, `breedId`, `age`, `ageType`, `weight`, `sellerId`, `askamount`, `startdate`, `enddate`, `bio`) VALUES ('$sex', '$name', $breedId, $age, '$ageType', $weight, 1, $askAmount , '$startDate', '$endDate', \"$animalBio\")";
-        echo $sql;
-
-
+      }
     }
+
+    
+ 

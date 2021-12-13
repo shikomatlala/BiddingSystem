@@ -1,8 +1,8 @@
 
 
-l79fIrV%@18E
+-- l79fIrV%@18E
 
-DROP DATABASE biddingsystem;
+-- DROP DATABASE biddingsystem;
 
 CREATE DATABASE biddingsystem;
 
@@ -16,7 +16,7 @@ CREATE TABLE `user`
     `idNumber` CHAR(13) NOT NULL UNIQUE,
     `phone` CHAR(10) NOT NULL UNIQUE,
     `email` VARCHAR(70) NOT NULL UNIQUE,
-    `password` VARCHAR(15) NOT NULL,
+    `password` VARCHAR(40) NOT NULL,
     `cAddress` VARCHAR(300) NOT NULL
 );
 
@@ -125,7 +125,7 @@ CREATE TABLE `livestock`
 (
     `stockId` INT(11) PRIMARY KEY AUTO_INCREMENT,
     `sex` CHAR(1) NOT NULL,
-    `name` VARCHAR(255) NOT NULL,
+    `livestockName` VARCHAR(255) NOT NULL,
     `breedId` INT(11) NOT NULL, 
     `age` INT(3) NOT NULL, 
     `ageType` VARCHAR(10) NOT NULL,
@@ -156,7 +156,7 @@ CREATE TABLE `livestockvideo`
 CREATE TABLE `bid`
 (
     `bidId` INT(11) PRIMARY KEY AUTO_INCREMENT,
-    `bidTime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `bidTime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `amount` DECIMAL(11, 2) NOT NULL, 
     `buyerId` INT(11) NOT NULL, 
     `stockId` INT(11) NOT NULL,

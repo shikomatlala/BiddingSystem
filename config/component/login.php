@@ -6,10 +6,10 @@
         $login = "
         <form class=\"\" action=\"$action\" method=\"post\">
             <label for=\"email\">Email</label><br>
-            <input class=\"\" type=\"email\" id=\"username\" name=\"username\" pattern=\"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$\" required><br><br>
+            <input class=\"inputFunction\" type=\"email\" id=\"username\" name=\"username\"  required><br><br>
             <label for=\"password\">Password</label><br>
-            <input class=\"\" type=\"password\" id=\"password\" name=\"password\" pattern=\"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}\" title=\"Eight or more characters\" required><br><br>
-            <input class=\"\" type=\"submit\" value=\"Submit\" name=\"$submitname\"><br><br>
+            <input class=\"inputFunction\" type=\"password\" id=\"password\" name=\"password\" title=\"Eight or more characters\" required><br><br>
+            <input class=\"submitButton\" type=\"submit\" value=\"Submit\" name=\"$submitname\"><br><br>
         </form>";
         return $login;
     }
@@ -19,7 +19,7 @@
         $createuser = "
         <form action=\"$action\" method=\"POST\">
             <label name=\"lblFName\"id=\"lblFname\"class=\"\"for=\"fName\">First Name</label>
-            <input type=\"text\"id=\"fName\"name=\"fName\"class=\"\"placeholder=\"First Name\"quired>
+            <input type=\"text\"id=\"fName\"name=\"fName\"class=\"\"placeholder=\"First Name\" required>
             <br>   <br>
             <label name=\"lblLName\"id=\"lblLName\"class=\"\"for=\"lName\">Last Name</label>
             <input type=\"text\"id=\"lName\"name=\"lName\"class=\"\"placeholder=\"Last Name\"required >
@@ -31,14 +31,14 @@
             <input type=\"tel\"id=\"phone\"name=\"phone\"class=\"\"placeholder=\"e.g 078 980 0909\" pattern=\"[0]{1}[1-9]{2}[0-9]{3}[0-9]{4}\" required >
             <br>   <br>
             <label name=\"lblEmail\"id=\"lblEmail\"class=\"\"for=\"email\">Email</label>
-            <input type=\"email\"id=\"email\"name=\"email\"class=\"\"placeholder=\"Email Address\" pattern=\"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$\" required >
+            <input type=\"email\"id=\"email\"name=\"email\"class=\"\"placeholder=\"Email Address\" required >
             <br>   <br>
             <label name=\"lblPassword1\"id=\"lblPassword1\"class=\"\"for=\"password1\">Enter Password</label>
-            <input type=\"password\"id=\"password\"name=\"password\"class=\"\"placeholder=\"Password\" pattern=\"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}\" title=\"Eight or more characters\" required >
+            <input type=\"password\"id=\"password\"name=\"password\"class=\"\"placeholder=\"Password\"  title=\"Eight or more characters\" required >
             <br>   <br>
 
             <label name=\"lblPassword2\"id=\"lblPassword2\"class=\"\"for=\"password2\">Confirm Password</label>
-            <input type=\"password\"id=\"password2\"name=\"password2\"class=\"\"placeholder=\"Password\" pattern=\"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}\" title=\"Eight or more characters\" required >
+            <input type=\"password\"id=\"password2\"name=\"password2\"class=\"\"placeholder=\"Password\" title=\"Eight or more characters\" required >
             <br>   <br>
             <label name=\"lblAddress\"id=\"lblAddress\"class=\"\"for=\"address\">Address</label>
 
@@ -88,9 +88,10 @@
 
             <input type=\"text\"id=\"address\"name=\"cAddress\"class=\"\"placeholder=\"Address\"value=\"$address\" required >
             <br>   <br>
-            <input type=\"submit\"name=\"$submitname\"value=\"Submit\">
+            <input class=\"submitButton\" type=\"submit\"name=\"$submitname\"value=\"Submit\">
         </form>";
         return $udpateuser;
 
 
     }
+

@@ -25,7 +25,7 @@
                 </div>
 
                 <div id="animalAgeDiv" class="">
-                    <lablel for="inputAnimalAge" class="" name="lblAnimalAge" id="lblAnimalAge">Enter Animal </label><br> 
+                    <lablel for="inputAnimalAge" class="" name="lblAnimalAge" id="lblAnimalAge">Enter Animal Age </label><br> 
                     <input class="" type="text" id="inputAnimalAge" name="inputAnimalAge" placeholder="Age" required>
                     <select id="selectAnimalAge" required class="" name="selectAnimalAge">
                         <option value="Day">Day(s)</option>
@@ -61,16 +61,11 @@
                     <input class="" type="datetime-local" id="endDate" name="endDate" onchange="validateEndDate()" required>
 
                 </div>
-
-                <div id="videoUploadDiv" calss="">
-                    <lablel for="uploadVideo" class="" name="lblUploadVideo" id="lblUploadVideo">Upload Your Livestock Video</label><br> 
-                    <input type="file" name="uploadVideo" id="uploadVideo">
-
-                </div>
                 <br>
                 <lablel for="createAuctionButton" class="" name="lblcreateAuctionButton" id="lblcreateAuctionButton">Click to create Auction</label><br> 
-
+                
                 <input class="" type="submit" id="createAuctionButton" name="createAuctionButton" value="Create Auction">
+                
             </form>
         <div>
 

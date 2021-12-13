@@ -56,7 +56,7 @@
 
     <h2>Are you Sure you want to delete your account?</h2>
     <form action="" method="POST">
-    <input type="submit" name="deleteaccount" value="Delete"><br><br>      
+    <input  class="deleteButton" type="submit" name="deleteaccount" value="Delete"><br><br>      
     </form>
 </body>
 
