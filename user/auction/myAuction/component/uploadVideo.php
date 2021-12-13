@@ -4,9 +4,11 @@
     {
         $targetDir = "../video/";
         $stockId = $_POST['auctionID'];
-        $fileName = $_FILES["uploadVideo"]["name"];
-        $targetFile = $targetDir . $fileName;
-        if (move_uploaded_file($_FILES["uploadVideo"]["tmp_name"], $targetFile)){
+        $fileName = basename($_FILES["uploadVideo"]["name"]);
+        $targetFile = $targetDir . basename($_FILES["uploadVideo"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+        if (move_uploaded_file($_FILES["uploadVideo"]["tmp_name"], $targetFile)) {
         // echo "The file ". htmlspecialchars( basename( $_FILES["uploadVideo"]["name"])). " has been uploaded.";
             //Insert The Create a record for the video which has been uploaded
             $sql = "INSERT INTO `livestockvideo` (`locationstring`, `stockId`) VALUES ('$fileName', '$stockId')";
@@ -16,14 +18,12 @@
             }
             else
             {
-                $sql;
                 echo "Sorry, There was an error recording your file";
             }
   
         } 
         else 
         {
-
             echo "Sorry, there was an error uploading your file.";
         }
     }
