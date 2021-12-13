@@ -14,15 +14,16 @@
     AND a.breedId = b.breedId
     AND b.typeId = c.typeId
     ORDER BY stockId DESC";
-//     SELECT a.stockId, sex, livestockName, age, ageType, weight, askamount, startdate, enddate, bio, b.name as breedName, c.name as animalTypeName 
-//      FROM `livestock` a, `breed` b, `animalType` c, `livestockvideo` d
-//      WHERE sellerId <> 2 
-// 	        AND a.breedId = b.breedId 
-//          AND b.typeId = c.typeId 
-//          AND d.stockId = a.stockId
-//      ORDER BY stockId DESC;
+    //     SELECT a.stockId, sex, livestockName, age, ageType, weight, askamount, startdate, enddate, bio, b.name as breedName, c.name as animalTypeName 
+    //      FROM `livestock` a, `breed` b, `animalType` c, `livestockvideo` d
+    //      WHERE sellerId <> 2 
+    // 	        AND a.breedId = b.breedId 
+    //          AND b.typeId = c.typeId 
+    //          AND d.stockId = a.stockId
+    //      ORDER BY stockId DESC;
 
     //Once I have selected all of them I want to create a way of showing what I need to have.
+
     $countAuctions = "SELECT COUNT(stockId) as countMyAuction FROM `livestock` WHERE sellerId = $sellerId";
     $countResult = mysqli_query($link, $countAuctions);
     $numOfAuctions = 0;
@@ -35,12 +36,15 @@
     $livestockId = 0;
     $result = mysqli_query($link, $sql);
     $attendanceRoll = "";
+    echo $attendanceRoll;
     if(mysqli_num_rows($result) > 0){
         //Find the number of create my auctions.
         while($row = mysqli_fetch_assoc($result))
         {
+            $livestockName = $row['livestockName'];
+            $stockId = $row['stockId'] ;
             $attendanceRoll .= "
-        <div id=\"auction-" . $row['stockId'] . "\" class=\"\">";
+            <h1>$stockId | $livestockName</h1>";
             $attendanceRoll .= "\n\t\t<table class=\"\">
             <tr>";
             $attendanceRoll .= "\n\t\t\t<th width=\"60\">Auction ID</th>";
@@ -107,11 +111,55 @@
             $attendanceRoll .= "\n\t\t\t<td>" .$statusValue . "</td>";
             $attendanceRoll .= "\n\t\t</tr>";
             
-            $attendanceRoll .= "\n\t\t</tr><br>";
+            $attendanceRoll .= "\n\t\t</tr><br><hr>";
             $attendanceRoll .= $videoHtml;
-            $attendanceRoll .= "</div>";
-            //Create somewhere to put the video
+            
 
+            //Show The Active bids for this item.
+
+            //Create somewhere to put the video
+            $attendanceRoll .= "<h2>Place Your Bid</h2>";//Create a button where we are going to allow the user to place a bid.
+            //Firstly we want to know where the user is bidding, once we know where user is bidding we can then place the bid.
+            //We need the livestockID.
+            //We need to put in the amount first in order for us to bid.
+            $buyerId = $_SESSION['buyerId'];
+            $attendanceRoll .="
+            <form action=\"component/placebid.php\" method=\"POST\">
+                <label for=\"inputBidPrice\" class=\"\">Place your bid here</label><br>
+                <input type=\"text\" placeholder=\"e.g 3999.99\" name=\"inputBidPrice\" id=\"inputBidPrice\" class=\"\"><br>
+                <input type=\"hidden\" name=\"stockId\" value=\"$stockId\">
+                <input type=\"hidden\" name=\"buyerId\" value=\"$buyerId\">
+                <input type=\"submit\" value=\"Bid\" name=\"submitBid\">
+            
+            </form>";
+            //Show a list of active bids for a give livestock.
+            //Show people who have placed their bids on the auction
+            $sql = "SELECT b.buyerId, CONCAT(SUBSTRING(c.fName, 1, 1), \" \", c.lName) as username, CONCAT(\"R\",a.amount) amount, a.bidtime
+            FROM `bid`a, `buyer` b, `user`c
+            WHERE a.buyerId = b.buyerId
+            AND c.userId = b.userId; ";
+            $result = mysqli_query($link, $sql);
+            if(mysqli_num_rows($result)>0){
+                $attendanceRoll .= "\n\t\t<table class=\"\"><tr>";
+                $attendanceRoll .= "\n\t\t\t<th width=\"60\">Auction ID</th>";
+                $attendanceRoll .= "\n\t\t\t<th>Livestock Name</th>";
+                $attendanceRoll .= "\n\t\t\t<th>Livestock Type</th>";
+                $attendanceRoll .= "\n\t\t\t<th>Breed</th>";
+                $attendanceRoll .= "\n\t\t\t<th>Sex</th>";
+                $attendanceRoll .= "\n\t\t\t<th>Weight</th>";
+                $attendanceRoll .= "\n\t\t\t<th>Age</th>";
+                $attendanceRoll .= "\n\t\t\t<th>Age Unit</th>";
+                $attendanceRoll .= "\n\t\t\t<th>Bio</th>";
+                $attendanceRoll .= "\n\t\t\t<th>Ask Amount</th>";
+                $attendanceRoll .= "\n\t\t\t<th>Start Date</th>";
+                $attendanceRoll .= "\n\t\t\t<th>End Date</th>";
+                $attendanceRoll .= "\n\t\t\t<th>Auction Status</th>";
+                $attendanceRoll .= "\n\t\t</tr>";
+                while($row = mysqli_fetch_assoc($result)){
+                    //C
+                }
+            }
+ 
         }
        
     }

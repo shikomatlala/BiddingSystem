@@ -16,7 +16,7 @@ CREATE TABLE `user`
     `idNumber` CHAR(13) NOT NULL UNIQUE,
     `phone` CHAR(10) NOT NULL UNIQUE,
     `email` VARCHAR(70) NOT NULL UNIQUE,
-    `password` VARCHAR(40) NOT NULL,
+    `password` VARCHAR(15) NOT NULL,
     `cAddress` VARCHAR(300) NOT NULL
 );
 

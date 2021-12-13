@@ -9,7 +9,7 @@
         $buyerId = $_SESSION['buyerId'];
         $amount = $_POST['inputBidPrice'];
         $sql = "INSERT INTO `bid` (`bidTime`, `amount`, `buyerId`, `stockId`) VALUES (CURRENT_TIMESTAMP, $amount, $buyerId, $stockId)";
-        if(mysqli_query($link, $sql))
+        if(mysqli_query($link, $slq))
         {
             echo "<script type='text/javascript'>alert('$message'); </script>";
             header("Location: ../index.php");
