@@ -1,4 +1,3 @@
-
 .submitButton{
     background-color: rgb(12,134,250,1);
     font-family: apple-system;
@@ -18,10 +17,10 @@
 
 }
 
+
 .inputFunction{
     background-color: orange;
 }
-
 
 
 .aTagClass{
@@ -31,10 +30,10 @@
 
 ul{
     width: 100%;
-    border: 1px  #e7e7e7;
-    background-color: #f3f3f3;
-    list-style-type: none;
-    margin: 0;
+
+
+}
+ul{
     padding: 0;
     overflow: hidden;
     display: inline-block;
