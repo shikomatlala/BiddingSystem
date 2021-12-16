@@ -43,13 +43,13 @@
         {
             $auctionCard = "";
             $stockId = $row['stockId'];
-            $mainDiv = "<div id=\"auctionD-$stockId\" class=\"\">";
-            $auctionTitle = "<div id=\"auctionTtlD-$stockId\" class=\"\">";
-            $auctionInformationDiv = "<div id=\"auctionInfoD-$stockId\" class=\"\">Empty For Now</div>";
-            $livestockDetailsDiv = "<div id=\"lStockD-$stockId\" class=\"\">";
-            $auctionDetailsDiv = "<div id=\"aDetailsD-$stockId\" calss=\"\">";
-            $placeBidDiv = "<div id=\"placeBidD-$stockId\" class=\"\">\n";
-            $biddersListDiv = "<div id=\"biddersListD-$stockId\" class=\"\">";
+            $mainDiv = "\n<div id=\"auctionD-$stockId\" class=\"\">";
+            $auctionTitle = "\t\t<div id=\"auctionTtlD-$stockId\" class=\"\">";
+            $auctionInformationDiv = "\t\t<div id=\"auctionInfoD-$stockId\" class=\"\">Empty For Now</div>";
+            $livestockDetailsDiv = "\n\t<div id=\"lStockD-$stockId\" class=\"\">";
+            $auctionDetailsDiv = "\t<div id=\"aDetailsD-$stockId\" calss=\"\">";
+            $placeBidDiv = "\t\t<div id=\"placeBidD-$stockId\" class=\"\">\n";
+            $biddersListDiv = "\t\t<div id=\"biddersListD-$stockId\" class=\"\">";
             $currentBid = "";
             $sqlCurrentBid = "SELECT CONCAT(\"<br><br>Current Bid R\",MAX(amount)) as currentBid  FROM `bid` WHERE stockId = $stockId";
             $resultCurrentBid = mysqli_query($link, $sqlCurrentBid);
@@ -62,38 +62,38 @@
             //Auction Title
             $auctionTitle .= "<h1>$stockId | $livestockName <br> $currentBid</h1></div>";
             //Livestock Description Table
-            $livestockDescriptionTable = "<div id=\"listockDescTblD-$stockId class=\"\">";
-            $livestockDescriptionTable .= "\n\t\t<table class=\"\">";
-            $livestockDescriptionTable .= "\n\t\t<tr>";
-            $livestockDescriptionTable .= "\n\t\t\t<th width=\"60\">Auction ID</th>";
-            $livestockDescriptionTable .= "\n\t\t\t<th>Livestock Name</th>";
-            $livestockDescriptionTable .= "\n\t\t\t<th>Livestock Type</th>";
-            $livestockDescriptionTable .= "\n\t\t\t<th>Breed</th>";
-            $livestockDescriptionTable .= "\n\t\t\t<th>Sex</th>";
-            $livestockDescriptionTable .= "\n\t\t\t<th>Weight</th>";
-            $livestockDescriptionTable .= "\n\t\t\t<th>Age</th>";
-            $livestockDescriptionTable .= "\n\t\t\t<th>Age Unit</th>";
-            $livestockDescriptionTable .= "\n\t\t\t<th>Bio</th>";
-            $livestockDescriptionTable .= "\n\t\t\t<th>Ask Amount</th>";
-            $livestockDescriptionTable .= "\n\t\t\t<th>Start Date</th>";
-            $livestockDescriptionTable .= "\n\t\t\t<th>End Date</th>";
+            $livestockDescriptionTable = "\t\t<div id=\"listockDescTblD-$stockId\" class=\"\">";
+            $livestockDescriptionTable .= "\n\t\t\t<table class=\"\">";
+            $livestockDescriptionTable .= "\n\t\t\t<tr>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<th width=\"60\">Auction ID</th>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<th>Livestock Name</th>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<th>Livestock Type</th>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<th>Breed</th>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<th>Sex</th>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<th>Weight</th>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<th>Age</th>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<th>Age Unit</th>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<th>Bio</th>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<th>Ask Amount</th>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<th>Start Date</th>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<th>End Date</th>";
             // $livestockDescriptionTable .= "\n\t\t\t<th>Auction Status</th>";
-            $livestockDescriptionTable .= "\n\t\t</tr>";
-            $livestockDescriptionTable .= "\n\t\t<tr>";
-            $livestockDescriptionTable .= "\n\t\t\t<td>" .$row['stockId'] . "</td>";
-            $livestockDescriptionTable .= "\n\t\t\t<td>" .$row['livestockName'] . "</td>";
-            $livestockDescriptionTable .= "\n\t\t\t<td>" .$row['animalTypeName'] . "</td>";
-            $livestockDescriptionTable .= "\n\t\t\t<td>" .$row['breedName'] . "</td>";
-            $livestockDescriptionTable .= "\n\t\t\t<td>" .$row['sex'] . "</td>";
-            $livestockDescriptionTable .= "\n\t\t\t<td>" .$row['weight'] . "</td>";
-            $livestockDescriptionTable .= "\n\t\t\t<td>" .$row['age'] . "</td>";
-            $livestockDescriptionTable .= "\n\t\t\t<td>" .$row['ageType'] . "</td>";
-            $livestockDescriptionTable .= "\n\t\t\t<td>" .$row['bio'] . "</td>";
-            $livestockDescriptionTable .= "\n\t\t\t<td>" .$row['askamount'] . "</td>";
-            $livestockDescriptionTable .= "\n\t\t\t<td>" .$row['startdate'] . "</td>";
-            $livestockDescriptionTable .= "\n\t\t\t<td>" .$row['enddate'] . "</td>";
-            $livestockDescriptionTable .= "\n\t\t</tr>";
-            $livestockDescriptionTable = "</div>";
+            $livestockDescriptionTable .= "\n\t\t\t</tr>";
+            $livestockDescriptionTable .= "\n\t\t\t<tr>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['stockId'] . "</td>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['livestockName'] . "</td>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['animalTypeName'] . "</td>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['breedName'] . "</td>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['sex'] . "</td>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['weight'] . "</td>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['age'] . "</td>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['ageType'] . "</td>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['bio'] . "</td>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['askamount'] . "</td>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['startdate'] . "</td>";
+            $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['enddate'] . "</td>";
+            $livestockDescriptionTable .= "\n\t\t\t</tr>";
+            $livestockDescriptionTable .= "\n\t\t\t</table>";
             //Check if the video exists and if it does not exist then let user user know such
             //But we also need to know if the auction is active or not.
             $_SESSION['stockId'] = $row['stockId'];
@@ -102,7 +102,7 @@
             $checkVideoResult = mysqli_query($link, $checkVideoSql);
             $statusValue = "";
             $videoName = "";
-            $livestockVideo = "<div id=\"lStockVideoD-$stockId\" class=\"\">";
+            $livestockVideo = "\t\t<div id=\"lStockVideoD-$stockId\" class=\"\">";
             if(mysqli_num_rows($checkVideoResult) > 0){
                 $statusValue = "Active for Bids";
                 //Now we need to know the time that the bid is valid or not
@@ -117,11 +117,11 @@
                 // $myfile = fopen($videoName, "r") or die("Unable to open file!");//Rather that do this I can just open a video
                 // echo fgets($myfile);
                 // fclose($myfile);
-                $livestockVideo .= "<br><video controls autoplay>
+                $livestockVideo .= "<br>\n\t\t\t<video controls autoplay>
                 <source src=\"$videoName\" type=\"video/mp4\">
                 Your browser does not support the video tag.
-              </video>
-              </div>";
+            </video>
+        </div>";
             }
             else{
                 $livestockVideo = "<br>Auction Incomplete!<br>
@@ -130,30 +130,30 @@
             // $auctionCard .= $videoHtml;
             //Show The Active bids for this item.
             //Create somewhere to put the video
-            $placeBidDiv .= "<h2>Place Your Bid</h2>\n";//Create a button where we are going to allow the user to place a bid.
+            $placeBidDiv .= "\t\t\t<h2>Place Your Bid</h2>\n";//Create a button where we are going to allow the user to place a bid.
             //Firstly we want to know where the user is bidding, once we know where user is bidding we can then place the bid.
             //We need the livestockID.
             //We need to put in the amount first in order for us to bid.
             $buyerId = $_SESSION['buyerId'];
-            $placeBidDiv .="
-            <form action=\"component/placebid.php\" method=\"POST\">
+            $placeBidDiv .="\t\t\t<form action=\"component/placebid.php\" method=\"POST\">
                 <label for=\"inputBidPrice\" class=\"\">Place your bid heres | Enter the amount of money below</label><br>
-                <input type=\"text\" placeholder=\"e.g 3999.99\" name=\"inputBidPrice\" id=\"inputBidPrice\" class=\"\"><br>
+                <input type=\"text\" placeholder=\"e.g 3999.99\" name=\"inputBidPrice\" id=\"inputBidPrice\" class=\"\">
                 <input type=\"hidden\" name=\"stockId\" value=\"$stockId\">
                 <input type=\"hidden\" name=\"buyerId\" value=\"$buyerId\">
-                <input type=\"submit\" value=\"Bid\" name=\"submitBid\">\n</form>\n</div>";
+                <input type=\"submit\" value=\"Bid\" name=\"submitBid\">\n\t\t\t</form>\n\t\t</div>";
             //Show a list bidders for a given livestock.
             //Show people who have placed their bids on the auction
-            $sqlBids = "SELECT b.buyerId, CONCAT(SUBSTRING(c.fName, 1, 1), \" \", c.lName) as username, CONCAT(\"R\",a.amount) amount, a.bidtime, bidId
+            $sqlBids = "SELECT a.bidId, b.buyerId, CONCAT(SUBSTRING(c.fName, 1, 1), \" \", c.lName) as username, CONCAT(\"R\",a.amount) amount, a.bidtime, bidId
             FROM `bid`a, `buyer` b, `user`c
             WHERE a.buyerId = b.buyerId
             AND c.userId = b.userId
             AND a.stockId = $stockId
-            ORDER BY amount DESC";
+            ORDER BY a.bidId DESC";
             $biddersTableList = "";
             $resultBids = mysqli_query($link, $sqlBids);
             if(mysqli_num_rows($resultBids)>0){
-                $biddersTableList .= "\n\t\t<table name=\"biddersList\" class=\"\"><tr>";
+                $biddersTableList .= "\n\t\t<table name=\"biddersList\" class=\"\">";
+                $biddersTableList .= "\n\t\t<tr>";
                 $biddersTableList .= "\n\t\t\t<th width=\"60\">Buyer ID</th>";
                 $biddersTableList .= "\n\t\t\t<th>Buyer Name</th>";
                 $biddersTableList .= "\n\t\t\t<th>Bid Amount</th>";
@@ -161,7 +161,7 @@
                 $biddersTableList .= "\n\t\t\t<th>Withdraw</th>";
                 $biddersTableList .= "\n\t\t</tr>";
                 while($row = mysqli_fetch_assoc($resultBids)){
-                    $biddersTableList .= "\n\t\t     <tr>";
+                    $biddersTableList .= "\n\t\t<tr>";
                     $rowBuyerId = $row['buyerId'];
                     $bidId = $row['bidId'];
                     $biddersTableList .= "\n\t\t\t<td>" .$row['buyerId'] . "</td>";
@@ -178,18 +178,22 @@
                         $biddersTableList .= "\n\t\t\t<td>" . $withdrawAuctionForm . "</td>";
                     }
                     else{
-                        $withdrawAuctionForm = "";
                         $biddersTableList .= "\n\t\t\t<td></td>";
-
                     }
-                    $biddersTableList .= "\n\t\t     </tr>";
-                    $biddersListDiv .= $biddersTableList . "\n</div>";
+                    $biddersTableList .= "\n\t\t</tr>";
                 }
+                $biddersTableList .= "\n\t\t</table>";
+                $biddersListDiv .= $biddersTableList . "\n</div>";
             }
-            $livestockDetailsDiv .= $auctionTitle . "\n" . $auctionInformationDiv . "\n" . $livestockVideo . "\n" . $livestockDescriptionTable . "\n</div>";
-            $auctionDetailsDiv .= $placeBidDiv . "\n" . $biddersListDiv . "</div>";
-            $mainDiv .= $livestockDetailsDiv . "\n" . $auctionDetailsDiv . "</div>";
-            echo $mainDiv;
+            $livestockDetailsDiv .= "\t\t\n" . $auctionTitle . "\n";
+            $livestockDetailsDiv .= $auctionInformationDiv . "\n" ;
+            $livestockDetailsDiv .= $livestockVideo . "\n";
+            $livestockDetailsDiv .= $livestockDescriptionTable . "\n\t\t</div>\n\t</div>";
+
+            $auctionDetailsDiv .= "\t\t\n" .$placeBidDiv . "\n";
+            $auctionDetailsDiv .=  $biddersListDiv . "</div>\n\t</div>";
+            $mainDiv .= $livestockDetailsDiv . "\n" . $auctionDetailsDiv . "\n</div>";
+            echo $mainDiv . "\n<hr>";
         }
     }
     else{
