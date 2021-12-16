@@ -1,0 +1,83 @@
+LOGIN PROCESS
+In the start of our system, we are going to show the user their homepage.
+Or rather the way that we have created it here is that when the user starts with the page they should firstly start by logging in, and once they are logged in, they should move on to the next step where they are going to see their home page.
+But before we start there we need to understand what process does what.
+
+The first process that we have is the login process.
+Here we are going to allow the user to login to the system - 
+To do so we want to create a login process.
+Once we are done loggin we are going to return back to the login page or rather if  the loggin has been successful we are going to take out use to the relevant page.
+
+But ye again since we are login in once, why should we create a process to log it?
+
+During the login part we have a component that we use to login, this component carries a login html form - We are then able to use this form and get our data to be sent where we need.
+
+The one goal that I have is to avoid taking an individual inside the system if they do not have an account yet
+They should always work outisde the system and only go inside the system when they have an account.
+
+
+new terms in calculus
+quotient = The quotient  is the number obtained by dividing one number by another.
+compute
+distribute
+parenthesis = ()
+The entire expression in the parenthesis is squared
+
+
+
+CREATE AUCTION
+today the goal is to create an auction and one of the things that I came to learn is that in creating an auction, one needs to be be able.
+What information do we need from the user about the auction.
+This information is the livestock information.
+
+
+daily credit coorporation
+
+
+   $targetDir = "api/";
+    $targetFile = $targetDir . basename($_FILES["uploadVideo"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+
+
+            // $check = getimagesize($_FILES["uploadVideo"]["tmp_name"]);
+        // if($check !==false){
+        //     echo "file is an image - " . $check["mime"] . ".";
+        //     $uploadOk = 1;
+        // }else{
+        //     echo "File is not an image.";
+        //     $uploadOk =0;
+        // }
+        // if ($uploadOk == 0) {
+        //     echo "Sorry, your file was not uploaded.";
+        //   // if everything is ok, try to upload file
+        //   } else {
+          if (move_uploaded_file($_FILES["uploadVideo"]["tmp_name"], $targetFile)) {
+            echo "The file ". htmlspecialchars( basename( $_FILES["uploadVideo"]["name"])). " has been uploaded.";
+          } 
+          else 
+          {
+            echo "Sorry, there was an error uploading your file.";
+          }
+
+
+          SELECT * FROM `user`, `seller`, `buyer` WHERE `email` = 'shikomatlala@gmail.com' AND `password` = '3THJ3n24pzWR7LR'
+
+SELECT * FROM `livestock` WHERE sellerId = 3
+
+SELECT * FROM `livestock` a, `breed` b, `animalType` c WHERE sellerId = 3
+AND a.breedId = b.breedId
+AND b.typeId = c.typeId;
+
+
+
+SELECT stockId, sex, livestockName, age, ageType, weight, askamount, startdate, enddate, bio, b.name as breedName, c.name as animalTypeName
+FROM `livestock` a, `breed` b, `animalType` c WHERE sellerId = 1
+AND a.breedId = b.breedId
+AND b.typeId = c.typeId
+
+
+SELECT b.buyerId, CONCAT(SUBSTRING(c.fName, 1, 1), " ", c.lName) as username, CONCAT("R",a.amount) amount, a.bidtime
+FROM `bid`a, `buyer` b, `user`c
+WHERE a.buyerId = b.buyerId
+AND c.userId = b.userId;

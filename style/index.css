@@ -1,0 +1,75 @@
+
+.submitButton{
+    background-color: rgb(12,134,250,1);
+    font-family: apple-system;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.deleteButton{
+    background-color:rgb(235, 43, 43);
+    font-family: apple-system;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+
+}
+
+.inputFunction{
+    background-color: orange;
+}
+
+
+
+.aTagClass{
+    color: green;
+
+}
+
+ul{
+    width: 100%;
+    border: 1px  #e7e7e7;
+    background-color: #f3f3f3;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: inline-block;
+}
+
+li {
+    float: left;
+}
+  
+
+li img{
+    width: 64px;
+    height: auto;
+    padding: 14px 16px;
+
+}
+li a {
+    color: #666;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+
+h1{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(34, 110, 224);
+}
+
+h2{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: grey;
+} 
+
+
