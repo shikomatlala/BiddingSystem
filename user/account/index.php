@@ -1,4 +1,5 @@
 <?php
+    include_once "../../config/connect.php";
     include_once "../component/navbar.php";
     //Make sure that you do not go to the same page twice!
     //Get the url and if the -- I think we can make use of javascript

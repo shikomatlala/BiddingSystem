@@ -81,3 +81,6 @@ SELECT b.buyerId, CONCAT(SUBSTRING(c.fName, 1, 1), " ", c.lName) as username, CO
 FROM `bid`a, `buyer` b, `user`c
 WHERE a.buyerId = b.buyerId
 AND c.userId = b.userId;
+
+
+      

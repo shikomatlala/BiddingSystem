@@ -6,9 +6,9 @@
         $login = "
         <form class=\"\" action=\"$action\" method=\"post\">
             <label for=\"email\">Email</label><br>
-            <input class=\"\" type=\"email\" id=\"username\" name=\"username\" pattern=\"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$\" required><br><br>
+            <input class=\"\" type=\"email\" id=\"username\" name=\"username\" required><br><br>
             <label for=\"password\">Password</label><br>
-            <input class=\"\" type=\"password\" id=\"password\" name=\"password\" pattern=\"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}\" title=\"Eight or more characters\" required><br><br>
+            <input class=\"\" type=\"password\" id=\"password\" name=\"password\" title=\"Eight or more characters\" required><br><br>
             <input class=\"\" type=\"submit\" value=\"Submit\" name=\"$submitname\"><br><br>
         </form>";
         return $login;
@@ -31,14 +31,14 @@
             <input type=\"tel\"id=\"phone\"name=\"phone\"class=\"\"placeholder=\"e.g 078 980 0909\" pattern=\"[0]{1}[1-9]{2}[0-9]{3}[0-9]{4}\" required >
             <br>   <br>
             <label name=\"lblEmail\"id=\"lblEmail\"class=\"\"for=\"email\">Email</label>
-            <input type=\"email\"id=\"email\"name=\"email\"class=\"\"placeholder=\"Email Address\" pattern=\"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$\" required >
+            <input type=\"email\"id=\"email\"name=\"email\"class=\"\"placeholder=\"Email Address\"  required >
             <br>   <br>
             <label name=\"lblPassword1\"id=\"lblPassword1\"class=\"\"for=\"password1\">Enter Password</label>
-            <input type=\"password\"id=\"password\"name=\"password\"class=\"\"placeholder=\"Password\" pattern=\"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}\" title=\"Eight or more characters\" required >
+            <input type=\"password\"id=\"password\"name=\"password\"class=\"\"placeholder=\"Password\"  title=\"Eight or more characters\" required >
             <br>   <br>
 
             <label name=\"lblPassword2\"id=\"lblPassword2\"class=\"\"for=\"password2\">Confirm Password</label>
-            <input type=\"password\"id=\"password2\"name=\"password2\"class=\"\"placeholder=\"Password\" pattern=\"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}\" title=\"Eight or more characters\" required >
+            <input type=\"password\"id=\"password2\"name=\"password2\"class=\"\"placeholder=\"Password\" title=\"Eight or more characters\" required >
             <br>   <br>
             <label name=\"lblAddress\"id=\"lblAddress\"class=\"\"for=\"address\">Address</label>
 
@@ -75,14 +75,14 @@
             <input type=\"tel\"id=\"phone\"name=\"phone\"class=\"\"placeholder=\"e.g 078 980 0909\"value=\"$phone\" pattern=\"[0]{1}[1-9]{2}[0-9]{3}[0-9]{4}\" required >
             <br>   <br>
             <label name=\"lblEmail\"id=\"lblEmail\"class=\"\"for=\"email\">Email</label>
-            <input type=\"email\"id=\"email\"name=\"email\"class=\"\"placeholder=\"Email Address\"value=\"$email\" pattern=\"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$\" required >
+            <input type=\"email\"id=\"email\"name=\"email\"class=\"\"placeholder=\"Email Address\"value=\"$email\"  required >
             <br>   <br>
             <label name=\"lblPassword1\"id=\"lblPassword1\"class=\"\"for=\"password1\">Enter Password</label>
-            <input type=\"password\"id=\"password\"name=\"password\"class=\"\"placeholder=\"Password\"value=\"$password\" pattern=\"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}\" title=\"Eight or more characters\" required >
+            <input type=\"password\"id=\"password\"name=\"password\"class=\"\"placeholder=\"Password\"value=\"$password\"  title=\"Eight or more characters\" required >
             <br>   <br>
 
             <label name=\"lblPassword2\"id=\"lblPassword2\"class=\"\"for=\"password2\">Confirm Password</label>
-            <input type=\"password\"id=\"password2\"name=\"password2\"class=\"\"placeholder=\"Password\"value=\"$password\" pattern=\"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}\" title=\"Eight or more characters\" required >
+            <input type=\"password\"id=\"password2\"name=\"password2\"class=\"\"placeholder=\"Password\"value=\"$password\" title=\"Eight or more characters\" required >
             <br>   <br>
             <label name=\"lblAddress\"id=\"lblAddress\"class=\"\"for=\"address\">Address</label>
 

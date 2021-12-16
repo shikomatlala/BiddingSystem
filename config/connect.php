@@ -34,7 +34,7 @@
     }
     $js_file .= "javascript/index.js";  
     $css_file .= "style/index.css";
-    $ico_file .= "media/icon/index.png";
+    $ico_file .= "media/icon/index.ico";
     // echo $js_file . "<br>";
     // echo $css_file;
     $out = "<!DOCTYPE html>\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">";
