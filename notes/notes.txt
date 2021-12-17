@@ -83,4 +83,72 @@ WHERE a.buyerId = b.buyerId
 AND c.userId = b.userId;
 
 
+
+SELECT (TO_DAYS(enddate) - TO_DAYS(startdate)) "Days Left" FROM `livestock` WHERE 1
+
+
+SELECT DATEDIFF( enddate,startdate)"Days Left" FROM `livestock
+
+SELECT TIMEDIFF( enddate,startdate)"Days Left" FROM `livestock` WHERE stockId = 1
+
+
+SELECT HOUR(enddate) - HOUR(startdate) / '24:00:00' "Days Left" FROM `livestock` WHERE stockId = 2
+
+
+SELECT HOUR(enddate), HOUR(startdate)"Days Left" FROM `livestock` WHERE stockId = 2
+
+
+SELECT cast(startdate as time)
+FROM `livestock` WHERE stockId =2;
+
+SELECT DATEDIFF( enddate,startdate)"Days Left" , HOUR(enddate) - HOUR(startdate) "Hours" FROM `livestock` WHERE stockId = 2
       
+
+
+SELECT (HOUR(enddate) - HOUR(startdate) / '24:00:00')  "Days Left" FROM `livestock` WHERE stockId = 2
+
+SELECT HOUR(enddate) - HOUR(startdate) % '24:00:00' "Days Left" FROM `livestock` WHERE stockId = 1
+
+
+SELECT TIMEDIFF( enddate)"Days Left" FROM `livestock` WHERE stockId = 1
+
+//Tell the user if the remaining time is hours of days
+SELECT DATEDIFF(enddate, SYSDATE())"Days Left" FROM `livestock` WHERE stockId = 1
+
+//If the start date is greater than the current date - then we want to hold the bid until the right day - so then we do not 
+
+SELECT 
+  CASE
+      WHEN (SELECT HOUR(enddate) - HOUR(startdate) % '24:00:00' 
+      FROM `livestock` 
+      WHERE stockId = 1) > 0 THEN (SELECT HOUR(enddate) - HOUR(startdate) % '24:00:00' 
+                                    FROM `livestock` 
+                                    WHERE stockId = 1) 
+      ELSE (SELECT (HOUR(enddate) - HOUR(startdate) % '24:00:00')*-1 
+            FROM `livestock` 
+            WHERE stockId = 1) 
+  END as "hoursLeft"
+
+
+//If the time is greater than 24 Hours then show the days if the time is >= 24 then show hours left;
+//We can now find the duration or rather the time left before the bid closes
+SELECT DATEDIFF( enddate,startdate) "DaysLeft" , 
+    (CASE
+        WHEN (SELECT HOUR(enddate) - HOUR(startdate) % '24:00:00' 
+        FROM `livestock` 
+        WHERE stockId = 1) > 0 THEN (SELECT HOUR(enddate) - HOUR(startdate) % '24:00:00' 
+                                      FROM `livestock` 
+                                      WHERE stockId = 1) 
+        ELSE (SELECT (HOUR(enddate) - HOUR(startdate) % '24:00:00')*-1 
+              FROM `livestock` 
+              WHERE stockId = 1) 
+    END ) as "hoursLeft"
+FROM `livestock`
+WHERE stockId = 1
+
+
+//But then yet again once the start date is equal to the so one of the things tha tI need to so is to make sure that wen the bid begins I put in the start page, or rather in the awaiting list, adnt hen I should be able to move it out, but here is the interesting thing, when I move it out I should also be able to change the time so that the new time now is called the sysdate time, but this also means that when a date is created, the date should actually be a sysdate, or rather than it being a sysdate, we should compare the final date to the sysdate - a bid is considered awaiting when the start date is greater thatn the current date, but when the strat date is equl to  or less than the current date and time the bid is considered start.
+
+
+
+

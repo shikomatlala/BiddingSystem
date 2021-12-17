@@ -120,6 +120,17 @@ INSERT INTO `breed` (`name`, `typeId`) VALUES ('Verata goat',5);
 INSERT INTO `breed` (`name`, `typeId`) VALUES ('Oberhasli goat',5);
 INSERT INTO `breed` (`name`, `typeId`) VALUES ('Peacock goat',5);
 
+CREATE TABLE `auctionStatus`
+(
+    `statusId` INT(2) PRIMARY KEY AUTO_INCREMENT,
+    `status` VARCHAR(50) NOT NULL
+);
+
+INSERT INTO `auctionStatus` (`status`) VALUES ('Active');
+INSERT INTO `auctionStatus` (`status`) VALUES ('Pending');
+INSERT INTO `auctionStatus` (`status`) VALUES ('Closed');
+
+
 
 CREATE TABLE `livestock`
 (
@@ -135,8 +146,10 @@ CREATE TABLE `livestock`
     `startdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `enddate` DATETIME NOT NULL,
     `bio` VARCHAR(4000),
+    `status` INT(2) NOT NULL,
     FOREIGN KEY (`sellerId`)  REFERENCES `seller` (`sellerId`),
-    FOREIGN KEY (`breedId`) REFERENCES `breed` (`breedId`)
+    FOREIGN KEY (`breedId`) REFERENCES `breed` (`breedId`),
+    FOREIGN KEY (`status`) REFERENCES `auctionStatus` (`statusId`)
 );
 
 -- The end date is very important becuase if the end date does not exist it means that abid can exist forever and not close, the issue with that is that the livestock could even die without being bought.

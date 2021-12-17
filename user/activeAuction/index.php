@@ -14,6 +14,7 @@
     FROM `livestock` a, `breed` b, `animalType` c WHERE sellerId <> $sellerId
     AND a.breedId = b.breedId
     AND b.typeId = c.typeId
+    AND a.startdate <= CURRENT_TIMESTAMP()
     ORDER BY stockId DESC";
     //     SELECT a.stockId, sex, livestockName, age, ageType, weight, askamount, startdate, enddate, bio, b.name as breedName, c.name as animalTypeName 
     //      FROM `livestock` a, `breed` b, `animalType` c, `livestockvideo` d
@@ -45,7 +46,27 @@
             $stockId = $row['stockId'];
             $mainDiv = "\n<div id=\"auctionD-$stockId\" class=\"\">";
             $auctionTitle = "\t\t<div id=\"auctionTtlD-$stockId\" class=\"\">";
-            $auctionInformationDiv = "\t\t<div id=\"auctionInfoD-$stockId\" class=\"\">Empty For Now</div>";
+            $sqlAuctionTimeLeft = "SELECT  MINUTE(enddate) - MINUTE(SYSDATE()) \"minutesLeft\", DATEDIFF( enddate,SYSDATE()) \"daysLeft\" , 
+            (CASE
+                WHEN (SELECT HOUR(enddate) - HOUR(SYSDATE()) % '24:00:00' 
+                FROM `livestock` 
+                WHERE stockId = $stockId) >= 0 THEN (SELECT HOUR(enddate) - HOUR(SYSDATE()) % '24:00:00' 
+                                              FROM `livestock` 
+                                              WHERE stockId = $stockId) 
+                ELSE (SELECT (HOUR(enddate) - HOUR(SYSDATE()) % '24:00:00')*-1 
+                      FROM `livestock` 
+                      WHERE stockId = $stockId) 
+            END ) as \"hoursLeft\"
+        FROM `livestock`
+        WHERE stockId = $stockId";
+            $timeLeftForAuction = "";
+            $resultAcutionTimeLeft = mysqli_query($link, $sqlAuctionTimeLeft);
+            if(mysqli_num_rows($resultAcutionTimeLeft) > 0){
+                while($rowAuctionTimeLeft = mysqli_fetch_assoc($resultAcutionTimeLeft)){
+                    $timeLeftForAuction .= $rowAuctionTimeLeft['daysLeft'] . " Days | " . $rowAuctionTimeLeft['hoursLeft'] . " Hours | " . $rowAuctionTimeLeft['minutesLeft'] . " Minutes";
+                }
+            }
+            $auctionInformationDiv = "\t\t<div id=\"auctionInfoD-$stockId\" class=\"\">$timeLeftForAuction</div>";
             $livestockDetailsDiv = "\n\t<div id=\"lStockD-$stockId\" class=\"\">";
             $auctionDetailsDiv = "\t<div id=\"aDetailsD-$stockId\" calss=\"\">";
             $placeBidDiv = "\t\t<div id=\"placeBidD-$stockId\" class=\"\">\n";
