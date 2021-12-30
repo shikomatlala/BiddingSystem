@@ -1,5 +1,5 @@
 <?php
- 
+    //I ma edditing this to show you that you will receive the files or rather the changes that I am making
     include_once "config/connect.php";
     include_once "config/component/login.php";
     if(isset($_POST['loginuser']))
