@@ -1,0 +1,1 @@
+This is put so that I github will  not ignore the video directory when a directory is empty github ignores it
