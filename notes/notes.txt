@@ -221,3 +221,8 @@ xhr.open('POST', 'http://biddingsystem/user/my-auctions/create/component/api/get
 
 
 INSERT INTO `livestock` ( `sex`, `livestockName`, `breedId`, `age`, `ageType`, `weight`, `sellerId`, `askamount`, `startdate`, `enddate`, `bio`, `status`) VALUES ('M', '', 11, 89, 'Day', 148, 1, 79000 , '2021-12-18T13:31', '2021-12-18T16:31', "Brahnman, Bred by Tsholofelo Itumeleng - Our breeds are the best, This American Brahman is the child of Marry the Black Widdow - Its the most tender and fresh, the Meet is low fat tender and sweet as it have some hormones that make it so", 1)
+
+
+testing - This has been create and save by Phenyo danko
+
+I think we should make sure that we create a file that we will use  to communicate
