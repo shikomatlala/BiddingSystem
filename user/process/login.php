@@ -10,6 +10,8 @@
             }
         }
     }
+    //You PC is very fast bro :-)
+    //I see you were working on some other things -
     $connectFile .= "config/connect.php";
     include_once $connectFile;
     if(isset($_POST['submit'])){
