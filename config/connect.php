@@ -1,8 +1,9 @@
 <?php
     session_start();
     $database = "biddingsystem";
-    $password = "l79fIrV%@18E";
-    // $password = "";
+    // $password = "l79fIrV%@18E";
+    //When we go online we need to ensure that we change this password 
+    $password = "";
     $username = "root";
     $servername = "localhost";
 
