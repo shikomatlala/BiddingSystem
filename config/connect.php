@@ -26,7 +26,7 @@
         //Now the goal is to cut the first two slashes
         if($url[$x] === "/"){
             $y++;
-            if($y >= 3){
+            if($y >= 5){
                 $js_file .= ".." .  $url[$x];
                 $css_file .= ".." . $url[$x];
                 $ico_file .= ".." . $url[$x];
