@@ -226,3 +226,21 @@ INSERT INTO `livestock` ( `sex`, `livestockName`, `breedId`, `age`, `ageType`, `
 testing - This has been create and save by Phenyo danko
 
 I think we should make sure that we create a file that we will use  to communicate
+
+
+
+SELECT * 
+FROM bid
+
+
+SELECT * 
+FROM bid a, buyer b
+WHERE stockId = 27
+AND a.buyerId = b.buyerId
+
+
+SELECT * 
+FROM bid a, buyer b, user c
+WHERE stockId = 27
+AND a.buyerId = b.buyerId
+AND c.userId = b.userId

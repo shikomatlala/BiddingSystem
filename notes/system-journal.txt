@@ -1,0 +1,15 @@
+30 Dec 2021
+Questions
+- What needs to be done
+- How will it be done?
+- When will it be done.
+
+
+What needs to be done.
+1 When a user deletes an auction the system should readjust its bids
+
+How 
+1 Every bid has a numeric ID, the ID is in numeric order so when one bid is deleted could we use the ID to reverse back ?
+
+
+adj - amenable: open and responsive to suggestion (someone is amenable)
