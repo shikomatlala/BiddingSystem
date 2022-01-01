@@ -29,7 +29,7 @@
       echo $sql;
       //Create Open up another page where the user is going to upload their video
       if(mysqli_query($link, $sql)){
-        header("Location: ../../active");
+        header("Location: ../../incomplete");
       }
     }
 

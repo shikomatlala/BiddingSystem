@@ -18,15 +18,15 @@
                                 header("location: ../../../");
                             }
                             else{
-                                echo "Error Removing User Account";
+                                echo "Cannot Remove User Account";
                             }
                         }
                         else{
-                            echo "Error Removing Buyer Information";
+                            echo "Cannot Remove Buyer Information";
                         }
                 }
                 else{
-                    echo "Error Removing Seller Information";
+                    echo "Cannot Remove Seller Information";
                 }
             }
         }
@@ -46,6 +46,8 @@
 </head>
 <body>
     <h1>Delete Your Account!!!</h1>
+    <h2>NB: You cannot delete your account if you have already participated in an auction.</h2>
+    <br><br><br>
     <h2>NB: You are about to delete your account Take note of the following</h2>
     <p> - Your bids will be removed from the system</p>
     <p> - Your livestock auctions will be removed</p>

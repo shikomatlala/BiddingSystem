@@ -13,3 +13,58 @@ How
 
 
 adj - amenable: open and responsive to suggestion (someone is amenable)
+
+System business rules - 
+
+The online auction service is only available to legal and natural persons who
+can enter into legally binding contract under the laws of South Africa. Without
+derogating from the generality thereof, the auction services are not available
+to minors.
+    According to this informaiton age is very important because we cannot allow minor individuals to be bidding.
+    Our system should be responsible for bridgin this rules
+    We therefore need to make sure that we create an age constraint
+
+
+2.4 By registering online as a bidder, the bidder consents to the collection and
+use of personal information by the Auctioneer for the purposes of creating
+the registration, and participation in the online auction.
+    which means we are allowed to capture the user's information
+
+
+3. Bidding Procedure
+3.1 The auction shall take place at the date and time as advertised or published
+and will not be postponed or delayed to enable any member or group of the
+public to partake in the auction.
+
+3.2 The auction is not an absolute auction but subject to reserved prices settled
+by the sellers and as pointed out by the Auctioneer prior to the sale of the
+said asset or lot.
+
+3.5 During a sale for which the bidder has registered, the bidder can bid for a lot
+by clicking on the bid button.
+
+3.6 The current bid will be displayed on the bidder’s screen during the sale.
+
+3.7 Until the fall of the hammer as contemplated in section 45(3) of CPA, any bid
+may be retracted or declined by the Auctioneer if not compliant with the CPA
+or the regulations issued in terms thereof.
+
+3.8 The bidder acknowledge that he/she are bidding at a live auction and agree
+that each bid entered (unless withdrawn before the fall of the hammer) is
+binding even if submitted in error. The bidder accepts full responsibility for
+every bid submitted through his/her online bidding account
+
+3.11 The sale by auction is complete at the fall of the hammer or any other
+practice through which the Auctioneer recognizes the highest bidder as the
+purchaser
+
+
+The one thing that I came to learn is that a bidder may only cancel their recent bid - 
+They cannot withdraw from an auction for this reason they not delete their account if they participated in a bid.
+
+
+
+Issues that Arrise
+- One of the thigns that I am thinking about is that hwen we create a a bid, the other users wil not be able to get our inforamtion without refreshing their page, nowt he issue with shi is that if the user delete their active bid, without refreshing they may create an inconsistency somehwere, because some one  might have already sent their bid and when theuser delete it may create an error somehwere.
+So we need to make sure that upon delete the system should check if the user is till the highest bidder if the user is not the highest bidder then it should procesed to delete the  or cancel the bid placed by the user - else the cancel request should be terminated, but the one thing that I want to do is to refresh only a single portion of the page and not the whole - 
+

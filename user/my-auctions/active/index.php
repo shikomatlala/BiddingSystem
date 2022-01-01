@@ -15,6 +15,7 @@
         AND d.statusId = a.statusId
         AND a.breedId = b.breedId
         AND b.typeId = c.typeId
+        AND a.statusId = 4
     ORDER BY stockId DESC";
 
     //Once I have selected all of them I want to create a way of showing what I need to have.
@@ -80,7 +81,6 @@
                 while($videoRow = mysqli_fetch_assoc($checkVideoResult)){
                     $videoName = "video/" . $videoRow['locationString'];
                 }
-
                 // $myfile = fopen($videoName, "r") or die("Unable to open file!");//Rather that do this I can just open a video
                 // echo fgets($myfile);
                 // fclose($myfile);
@@ -88,7 +88,6 @@
                 <source src=\"$videoName\" type=\"video/mp4\">
                 Your browser does not support the video tag.
               </video>";
-
             }
             else{
                 $statusValue = "Auction Incomplete<br>" . uploadVideo($stockId);//Create a button which will be used to insert the video
@@ -100,11 +99,7 @@
             $attendanceRoll .= $videoHtml;
             $attendanceRoll .= "</div>";
             //Create somewhere to put the video
-
         }
-       
     }
     echo $attendanceRoll;
-
-
 ?>
