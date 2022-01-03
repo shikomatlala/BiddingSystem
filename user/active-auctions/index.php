@@ -142,7 +142,7 @@
                 // $myfile = fopen($videoName, "r") or die("Unable to open file!");//Rather that do this I can just open a video
                 // echo fgets($myfile);
                 // fclose($myfile);
-                $livestockVideo .= "<br>\n\t\t\t<video controls autoplay>
+                $livestockVideo .= "<br>\n\t\t\t<video>
                 <source src=\"$videoName\" type=\"video/mp4\">
                 Your browser does not support the video tag.
             </video>
