@@ -26,7 +26,7 @@
         //Now the goal is to cut the first two slashes
         if($url[$x] === "/"){
             $y++;
-            if($y >= 5){
+            if($y >= 4){
                 $js_file .= ".." .  $url[$x];
                 $css_file .= ".." . $url[$x];
                 $ico_file .= ".." . $url[$x];
@@ -34,9 +34,9 @@
         }
     }
 
-    $js_file .= "../javascript/index.js";  
-    $css_file .= "../style/index.css";
-    $ico_file .= "../media/icon/index.ico";
+    $js_file .= "javascript/index.js";  
+    $css_file .= "style/index.css";
+    $ico_file .= "media/icon/index.ico";
     // echo $js_file . "<br>";
     // echo $css_file;
     $out = "<!DOCTYPE html>\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">";

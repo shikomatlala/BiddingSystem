@@ -1,6 +1,5 @@
 <?php
     include_once "config/connect.php";
-    
     include_once "config/component/login.php";
     if(isset($_POST['loginuser']))
     {
@@ -30,11 +29,13 @@
         }
         else{
             $html = "
-                <h1>WELCOME TO THE BIDDING SYSTEM</h1>
-                <h2>User Not Found</h2>
-                <h2>Sign In</h2>" . login("", "loginuser") . "
-                <div class=\"\">
-                    <a href=\"create\">New User?</a><br>
+                <div class=\"showcase\">
+                    <h1>WELCOME TO THE BIDDING SYSTEM</h1>
+                    <h2>User Not Found</h2>
+                    <h2>Sign In</h2>" . login("", "loginuser") . "
+                    <div class=\"\">
+                        <a href=\"create\">New User?</a><br>
+                    </div>
                 </div>
     </body>
 </html>";
@@ -44,11 +45,13 @@
     else
     {
         $html = "
-        <h1>WELCOME TO THE BIDDING SYSTEM</h1>
-        <h2>Sign In</h2>" . login("", "loginuser") . "
-        <div class=\"\">
-            <a href=\"create\">New User?</a><br>
-        </div>
+        <div class=\"showcase\">
+            <h1>WELCOME TO THE BIDDING SYSTEM</h1>
+            <h2>Sign In</h2>" . login("", "loginuser") . "
+            <div class=\"\">
+                <a href=\"create\">New User?</a><br>
+            </div>
+        </div> 
     </body>
 </html>";
 
