@@ -1,0 +1,7 @@
+30 Dec 2021
+Today I came to learn that when we upoad a system it functions differently than when it is hosten locally, I do not know why, but I am sying this as I came to learn that when a system is online some parts of PHP will work differently, now I think that the issue that we have is that the system does not know the location of the function that is istrying to use, but it seems as thought that is not the case, It think that the case is that we cannot $link a function to the databse.
+function updateBids($link){
+    //statements
+} 
+On the online version of the system the updateBids() functions is able to get called and used and the argument $link workds well
+Aftear all the error here was not that the function does not receive the $link nor that the location of the script contaiing the function is not known by the server the issue was that the sql statement did not compform with the sql script or rather with the database but now it works well soluction was to drop the database and create it again using the right databse

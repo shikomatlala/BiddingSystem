@@ -5,7 +5,6 @@
     //updateBids();
 
     function updateBids($link){
-		
         //include_once "../../../config/connect.php";// I am going to have a problem location where this connection is, because I am assuming that this component is going to be used by many scripts from different location in the system
         $sql = "SELECT * FROM `livestock` a, `auctionStatus` b 
                 WHERE a.statusId = b.statusId
