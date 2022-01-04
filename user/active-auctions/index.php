@@ -67,13 +67,16 @@
             $livestockDetailsDiv = "\n\t<div id=\"lStockD-$stockId\" class=\"\">";
             $auctionDetailsDiv = "\t<div id=\"aDetailsD-$stockId\" calss=\"\">";
             $placeBidDiv = "\t\t<div id=\"placeBidD-$stockId\" class=\"\">\n";
+            $animalBioDiv = "\t\t<div id=\"animalBio-$stockId\" class=\"\">\n";
             $biddersListDiv = "\t\t<div id=\"biddersListD-$stockId\" class=\"\">";
             $currentBid = "";
-            $sqlCurrentBid = "SELECT CONCAT(\"<br><br>Current Bid R\",MAX(amount)) as currentBid  FROM `bid` WHERE stockId = $stockId";
+            $currentBid2 = 0.0;
+            $sqlCurrentBid = "SELECT CONCAT(\"<br><br>Current Bid R\",MAX(amount)) as currentBid, MAX(amount) as currentBid2  FROM `bid` WHERE stockId = $stockId";
             $resultCurrentBid = mysqli_query($link, $sqlCurrentBid);
             if(mysqli_num_rows($resultCurrentBid) > 0){
                 while($rowCurrentBid = mysqli_fetch_assoc($resultCurrentBid)){
                     $currentBid = $rowCurrentBid['currentBid'];
+                    $currentBid2 = $rowCurrentBid['currentBid2'];
                 }
             }
             $livestockName = $row['livestockName'];
@@ -94,7 +97,7 @@
             $livestockDescriptionTable .= "\n\t\t\t\t<th>Weight</th>";
             $livestockDescriptionTable .= "\n\t\t\t\t<th>Age</th>";
             $livestockDescriptionTable .= "\n\t\t\t\t<th>Age Unit</th>";
-            $livestockDescriptionTable .= "\n\t\t\t\t<th>Bio</th>";
+            //$livestockDescriptionTable .= "\n\t\t\t\t<th>Bio</th>";
             $livestockDescriptionTable .= "\n\t\t\t\t<th>Ask Amount</th>";
             $livestockDescriptionTable .= "\n\t\t\t\t<th>Start Date</th>";
             $livestockDescriptionTable .= "\n\t\t\t\t<th>End Date</th>";
@@ -109,12 +112,13 @@
             $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['weight'] . "</td>";
             $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['age'] . "</td>";
             $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['ageType'] . "</td>";
-            $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['bio'] . "</td>";
+            //$livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['bio'] . "</td>";
             $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['askamount'] . "</td>";
             $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['startdate'] . "</td>";
             $livestockDescriptionTable .= "\n\t\t\t\t<td>" .$row['enddate'] . "</td>";
             $livestockDescriptionTable .= "\n\t\t\t</tr>";
             $livestockDescriptionTable .= "\n\t\t\t</table>";
+            $animalBioDiv .= $row['bio'] . "</div>";
             //Check if the video exists and if it does not exist then let user user know such
             //But we also need to know if the auction is active or not.
             $_SESSION['stockId'] = $row['stockId'];
@@ -185,24 +189,26 @@
             AND c.userId = b.userId
             AND a.stockId = $stockId
             ORDER BY a.bidId DESC";
+            //echo "<br>" . $sqlBids . "<br>";
             $biddersTableList = "";
+
             $resultBids = mysqli_query($link, $sqlBids);
             if(mysqli_num_rows($resultBids)>0){
 				//Withdraw all bids
-				$biddersTableList .= "
-				<br>
-				<form action=\"component/withdrawAllBids.php\" method=\"POST\">
-				<label>To withdraw from Auction click the withdraw from auction button</label><br>
-				<input type=\"hidden\" name=\"stockId\" value=\"$stockId\">
-				<input class=\"deleteButton\" type=\"submit\" value=\"Withdraw From Auction\" name=\"withdraw\">
-				</form>";
+				// $biddersTableList .= "
+				// <br>
+				// <form action=\"component/withdrawAllBids.php\" method=\"POST\">
+				// <label>To withdraw from Auction click the withdraw from auction button</label><br>
+				// <input type=\"hidden\" name=\"stockId\" value=\"$stockId\">
+				// <input class=\"deleteButton\" type=\"submit\" value=\"Withdraw From Auction\" name=\"withdraw\">
+				// </form>";
                 $biddersTableList .= "\n\t\t<table name=\"biddersList\" class=\"\">";
                 $biddersTableList .= "\n\t\t<tr>";
                 $biddersTableList .= "\n\t\t\t<th width=\"60\">Buyer ID</th>";
                 $biddersTableList .= "\n\t\t\t<th>Buyer Name</th>";
                 $biddersTableList .= "\n\t\t\t<th>Bid Amount</th>";
                 $biddersTableList .= "\n\t\t\t<th>Bid Time</th>";
-                $biddersTableList .= "\n\t\t\t<th>Withdraw</th>";
+                $biddersTableList .= "\n\t\t\t<th>Cancel</th>";
                 $biddersTableList .= "\n\t\t</tr>";
                 while($row = mysqli_fetch_assoc($resultBids)){
                     $biddersTableList .= "\n\t\t<tr>";
@@ -214,7 +220,8 @@
                     $biddersTableList .= "\n\t\t\t<td>" .$row['bidtime'] . "</td>";
                     $withdrawAuctionForm = "";
 					//Now want to be strategic about this - we cannot withdraw bids that have been passed or outmatched
-                    if($rowBuyerId == $buyerId && $row['amount2'] >= $highestBidValue)
+                    //echo "The current Bid " . $currentBid . "<br>";
+                    if($rowBuyerId == $buyerId && $row['amount2'] >= $highestBidValue && $row['amount2'] == $currentBid2 )
 					{
 						//echo $rowBuyerId  . " == " .  $buyerId . " &&  " .  $row['amount2'] . " >= "  . $highestBidValue  . "<br>";
                         $withdrawAuctionForm = "<form action=\"component/withdrawBid.php\" method=\"POST\">
@@ -236,7 +243,8 @@
             $livestockDetailsDiv .= "\t\t\n" . $auctionTitle . "\n";
             $livestockDetailsDiv .= $auctionInformationDiv . "\n" ;
             $livestockDetailsDiv .= $livestockVideo . "\n";
-            $livestockDetailsDiv .= $livestockDescriptionTable . "\n\t\t</div>\n\t</div>";
+            $livestockDetailsDiv .= $livestockDescriptionTable . "\n\t\t</div>";
+            $livestockDetailsDiv .= $animalBioDiv .  "\n\t</div>";
 
             $auctionDetailsDiv .= "\t\t\n" .$placeBidDiv . "\n";
             $auctionDetailsDiv .=  $biddersListDiv . "</div>\n\t</div>";
