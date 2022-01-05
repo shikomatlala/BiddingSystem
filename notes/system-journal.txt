@@ -68,3 +68,24 @@ Issues that Arrise
 - One of the thigns that I am thinking about is that hwen we create a a bid, the other users wil not be able to get our inforamtion without refreshing their page, nowt he issue with shi is that if the user delete their active bid, without refreshing they may create an inconsistency somehwere, because some one  might have already sent their bid and when theuser delete it may create an error somehwere.
 So we need to make sure that upon delete the system should check if the user is till the highest bidder if the user is not the highest bidder then it should procesed to delete the  or cancel the bid placed by the user - else the cancel request should be terminated, but the one thing that I want to do is to refresh only a single portion of the page and not the whole - 
 
+
+Think about how you can not why you can't 
+
+
+04 Jan 2022
+WE HAVE THE FOLLOWING QUESTIONS TO THE SYSTEM THAT WE ARE WORKING ON 
+- What happens after an auction that I created is closed
+    show me all competing bidders 
+    show the winning bidder 
+        Give me the winning bidders details including their contact details
+
+- What happens after an auction that I participated in closes?
+    If I am the highest bidder then I should see the bids that I won 
+        I want to know the sellers details including their contact details
+        I want to know the item that I baught 
+        I want to know the date and the amount or rather the price of the item.
+    If I am not the highest bidder then that information does not concern me anymore.
+
+- How do I go to the bids that I am participating in?
+    I want the system to keep a list of the bids that I participated in so that I do not have to scroll down the page looking for the bids that I participated in.
+    //The one debate that I am having in my mind is weather I should include a place where
