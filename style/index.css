@@ -35,7 +35,14 @@ ul{
 
 
 }
-ul{
+
+body
+{
+	background-image:url('../images/auction2.jpg');
+}
+
+ul
+{
     padding: 0;
     overflow: hidden;
     display: inline-block;
@@ -85,9 +92,30 @@ body{
    height : 500px;
 
 }
-.my-auctions{
+/* .my-auctions{
 
+} */
+
+
+
+.showcase
+{
+    /* background-color: yellow; */
+	background-position:center right;
+	min-height:300px;
+	margin-bottom:30px;
+	text-align: center;
 }
-
-
-
+.showcase h1
+{
+    color:#fff;
+    font-size:50px;
+    line-height: 1.6em;
+    padding-top:30px;
+}
+h1
+{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(34, 110, 224);
+}
