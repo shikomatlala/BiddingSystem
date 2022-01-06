@@ -95,8 +95,9 @@ body{
 /* .my-auctions{
 
 } */
-
-
+.style-1-component{
+    color: red;
+}
 
 .showcase
 {

@@ -233,6 +233,10 @@ SELECT *
 FROM bid
 
 
+
+
+
+
 SELECT * 
 FROM bid a, buyer b
 WHERE stockId = 27
@@ -253,3 +257,20 @@ SELECT a.bidId, b.buyerId, CONCAT(SUBSTRING(c.fName, 1, 1), " ", c.lName) as use
             AND a.stockId = 6
             AND amount = (SELECT MAX(amount) FROM bid WHERE stockId = 6)
             ORDER BY a.bidId DESC
+
+
+
+cout << "Shiko Matlala";
+
+cout << "<!DOCTYPE html>
+          <html lang=\"\">" 
+          <head>
+              <meta charset=\"UTF-8\">
+              <meta http-equiv="X-UA-Compatible\" content=\"IE=edge\">
+              <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+              <title>Document</title>
+          </head>
+          <body>
+              
+          </body>
+          </html>";
