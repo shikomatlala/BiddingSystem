@@ -15,7 +15,7 @@
         AND d.statusId = a.statusId
         AND a.breedId = b.breedId
         AND b.typeId = c.typeId
-        AND a.statusId = 3
+        AND a.statusId = 2
     ORDER BY stockId DESC";
 
     //Once I have selected all of them I want to create a way of showing what I need to have.
@@ -84,7 +84,7 @@
                 // $myfile = fopen($videoName, "r") or die("Unable to open file!");//Rather that do this I can just open a video
                 // echo fgets($myfile);
                 // fclose($myfile);
-                $videoHtml = "<br><video controls autoplay>
+                $videoHtml = "<br><video>
                 <source src=\"$videoName\" type=\"video/mp4\">
                 Your browser does not support the video tag.
               </video>";
@@ -100,6 +100,10 @@
             $attendanceRoll .= "</div>";
             //Create somewhere to put the video
         }
+    }
+    else
+    {
+        echo "<h3>You do not have any pending auctions created</h3>";
     }
     echo $attendanceRoll;
 ?>
