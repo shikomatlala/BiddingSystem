@@ -1,5 +1,6 @@
 <?php
 include_once "../config/connect.php";
+include_once "../config/component/login.php";
 if(isset($_POST['createUser']))
 {
     //Get the values of all the elements that we have created
@@ -39,7 +40,15 @@ if(isset($_POST['createUser']))
                     if(mysqli_query($link, $sql))
                     {
                         echo "User Added Successfully";//We can create a pop-up using java script to indicate that the user has successfully logged in
-                        header("location: ../");
+                        //header("location: ../");
+                        // echo "<script type='text/javascript'>
+                        // alert('User Created Successfully'); 
+                        // setTimeout(function (){window.location.href = 'http://biddingsystem.bitnamiapp.com/user/active-auctions';},0); // 5 seconds 
+                        // </script>";
+                        echo "<script type='text/javascript'>
+                        alert('User Created Successfully'); 
+                        setTimeout(function (){window.location.href = '../';},0); // 5 seconds 
+                        </script>";
                     }
                 }
             }
@@ -52,9 +61,9 @@ if(isset($_POST['createUser']))
         //If there is an error we want to tell the user where the error is found?
         //This we can do by making use of javascript.
         //But where it gets interesting is that when e update the user we need to use this component and we have already created it.
+        echo "\n<h3>". mysqli_error($link) . "</h3>";
         echo "\nThere was an Error\n";
         echo updateuser("", "createUser");
-        echo "\n". $sql;
 
 
     }

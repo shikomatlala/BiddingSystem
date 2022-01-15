@@ -89,3 +89,7 @@ WE HAVE THE FOLLOWING QUESTIONS TO THE SYSTEM THAT WE ARE WORKING ON
 - How do I go to the bids that I am participating in?
     I want the system to keep a list of the bids that I participated in so that I do not have to scroll down the page looking for the bids that I participated in.
     //The one debate that I am having in my mind is weather I should include a place where
+
+
+
+

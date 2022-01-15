@@ -29,43 +29,44 @@
     }
     $livestockId = 0;
     $result = mysqli_query($link, $sql);
-    $attendanceRoll = "";
+    $livestockTable = "";
+    $noIncomplete = "";
     if(mysqli_num_rows($result) > 0){
         //Find the number of create my auctions.
         while($row = mysqli_fetch_assoc($result))
         {
-            $attendanceRoll .= "
+        $livestockTable .= "
         <div id=\"auction-" . $row['stockId'] . "\" class=\"\">";
-            $attendanceRoll .= "\n\t\t<table class=\"\">
+        $livestockTable .= "\n\t\t<table class=\"\">
             <tr>";
-            $attendanceRoll .= "\n\t\t\t<th width=\"60\">Auction ID</th>";
-            $attendanceRoll .= "\n\t\t\t<th>Livestock Name</th>";
-            $attendanceRoll .= "\n\t\t\t<th>Livestock Type</th>";
-            $attendanceRoll .= "\n\t\t\t<th>Breed</th>";
-            $attendanceRoll .= "\n\t\t\t<th>Sex</th>";
-            $attendanceRoll .= "\n\t\t\t<th>Weight</th>";
-            $attendanceRoll .= "\n\t\t\t<th>Age</th>";
-            $attendanceRoll .= "\n\t\t\t<th>Age Unit</th>";
-            $attendanceRoll .= "\n\t\t\t<th>Bio</th>";
-            $attendanceRoll .= "\n\t\t\t<th>Ask Amount</th>";
-            $attendanceRoll .= "\n\t\t\t<th>Start Date</th>";
-            $attendanceRoll .= "\n\t\t\t<th>End Date</th>";
-            $attendanceRoll .= "\n\t\t\t<th>Auction Status</th>";
-            $attendanceRoll .= "\n\t\t     </tr>";
+        $livestockTable .= "\n\t\t\t<th width=\"60\">Auction ID</th>";
+        $livestockTable .= "\n\t\t\t<th>Livestock Name</th>";
+        $livestockTable .= "\n\t\t\t<th>Livestock Type</th>";
+        $livestockTable .= "\n\t\t\t<th>Breed</th>";
+        $livestockTable .= "\n\t\t\t<th>Sex</th>";
+        $livestockTable .= "\n\t\t\t<th>Weight</th>";
+        $livestockTable .= "\n\t\t\t<th>Age</th>";
+        $livestockTable .= "\n\t\t\t<th>Age Unit</th>";
+        $livestockTable .= "\n\t\t\t<th>Bio</th>";
+        $livestockTable .= "\n\t\t\t<th>Ask Amount</th>";
+        $livestockTable .= "\n\t\t\t<th>Start Date</th>";
+        $livestockTable .= "\n\t\t\t<th>End Date</th>";
+        $livestockTable .= "\n\t\t\t<th>Auction Status</th>";
+        $livestockTable .= "\n\t\t     </tr>";
 
-            $attendanceRoll .= "\n\t\t     <tr>";
-            $attendanceRoll .= "\n\t\t\t<td>" .$row['stockId'] . "</td>";
-            $attendanceRoll .= "\n\t\t\t<td>" .$row['livestockName'] . "</td>";
-            $attendanceRoll .= "\n\t\t\t<td>" .$row['animalTypeName'] . "</td>";
-            $attendanceRoll .= "\n\t\t\t<td>" .$row['breedName'] . "</td>";
-            $attendanceRoll .= "\n\t\t\t<td>" .$row['sex'] . "</td>";
-            $attendanceRoll .= "\n\t\t\t<td>" .$row['weight'] . "</td>";
-            $attendanceRoll .= "\n\t\t\t<td>" .$row['age'] . "</td>";
-            $attendanceRoll .= "\n\t\t\t<td>" .$row['ageType'] . "</td>";
-            $attendanceRoll .= "\n\t\t\t<td>" .$row['bio'] . "</td>";
-            $attendanceRoll .= "\n\t\t\t<td>R" .$row['askamount'] . "</td>";
-            $attendanceRoll .= "\n\t\t\t<td>" .$row['startdate'] . "</td>";
-            $attendanceRoll .= "\n\t\t\t<td>" .$row['enddate'] . "</td>";
+        $livestockTable .= "\n\t\t     <tr>";
+        $livestockTable .= "\n\t\t\t<td>" .$row['stockId'] . "</td>";
+        $livestockTable .= "\n\t\t\t<td>" .$row['livestockName'] . "</td>";
+        $livestockTable .= "\n\t\t\t<td>" .$row['animalTypeName'] . "</td>";
+        $livestockTable .= "\n\t\t\t<td>" .$row['breedName'] . "</td>";
+        $livestockTable .= "\n\t\t\t<td>" .$row['sex'] . "</td>";
+        $livestockTable .= "\n\t\t\t<td>" .$row['weight'] . "</td>";
+        $livestockTable .= "\n\t\t\t<td>" .$row['age'] . "</td>";
+        $livestockTable .= "\n\t\t\t<td>" .$row['ageType'] . "</td>";
+        $livestockTable .= "\n\t\t\t<td>" .$row['bio'] . "</td>";
+        $livestockTable .= "\n\t\t\t<td>R" .$row['askamount'] . "</td>";
+        $livestockTable .= "\n\t\t\t<td>" .$row['startdate'] . "</td>";
+        $livestockTable .= "\n\t\t\t<td>" .$row['enddate'] . "</td>";
             //Check if the video exists and if it does not exist then let user user know such
             //But we also need to know if the auction is active or not.
             $_SESSION['stockId'] = $row['stockId'];
@@ -92,19 +93,20 @@
             else{
                 $statusValue = "Auction Incomplete<br>" . uploadVideo($stockId);//Create a button which will be used to insert the video
             }
-            $attendanceRoll .= "\n\t\t\t<td>" .$statusValue . "</td>";
-            $attendanceRoll .= "\n\t\t</tr>";
+        $livestockTable .= "\n\t\t\t<td>" .$statusValue . "</td>";
+        $livestockTable .= "\n\t\t</tr>";
             
-            $attendanceRoll .= "\n\t\t</tr><br>";
-            $attendanceRoll .= $videoHtml;
-            $attendanceRoll .= "</div>";
+        $livestockTable .= "\n\t\t</tr><br>";
+        $livestockTable .= $videoHtml;
+        $livestockTable .= "</div>";
             //Create somewhere to put the video
         }
     }
     else
     {
-        echo "<h3>You do not have any active auctions created</h3>";
+        $noIncomplete =  "<h3>You do not have any incomplete auctions</h3>";
     }
-    echo "<h1>Incomple Auctions</h1>";
-    echo $attendanceRoll;
+    echo "<h1>Incomplete Auctions</h1>";
+    echo $noIncomplete; //empty 
+    echo $livestockTable;
 ?>

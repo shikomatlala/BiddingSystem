@@ -49,9 +49,11 @@
     <h2>NB: You cannot delete your account if you have already participated in an auction.</h2>
     <br><br><br>
     <h2>NB: You are about to delete your account Take note of the following</h2>
+<div class = \"cautions\">
     <p> - Your bids will be removed from the system</p>
     <p> - Your livestock auctions will be removed</p>
     <p> - You will not be able to retrieve your information again</p>
+</div>
     <br><br>
 
     <h2>NB: Upon successful deletion you will be logged out of the system automatically</h2>
