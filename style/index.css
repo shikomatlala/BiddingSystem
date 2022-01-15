@@ -38,7 +38,8 @@ ul{
 
 body
 {
-	background-image:url('../images/auction2.jpg');
+	/* background-image:url('../images/auction2.jpg'); */
+    background-color: rgb(153, 160, 143);
 }
 
 ul
@@ -81,11 +82,11 @@ h2{
     color: white;
 } 
 
-body{
+/* body{
 	background-image:url('../images/auction2.jpg');
-}
+} */
 body{
-   outline:2px solid black;
+   /* outline:2px solid black; */
    background-size :110% 133%; 
    background-repeat: no-repeat;
    background-position: center;
