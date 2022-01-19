@@ -6,10 +6,10 @@
         $login = "
         <form class=\"\" action=\"$action\" method=\"post\">
             <label for=\"email\">Email</label><br>
-            <input class=\"\" type=\"email\" id=\"username\" name=\"username\" required><br><br>
+            <input class=\"inputStyle\" type=\"email\" id=\"username\" name=\"username\" required><br><br>
             <label for=\"password\">Password</label><br>
-            <input class=\"\" type=\"password\" id=\"password\" name=\"password\" title=\"Eight or more characters\" required><br><br>
-            <input class=\"\" type=\"submit\" value=\"Submit\" name=\"$submitname\"><br><br>
+            <input class=\"inputStyle\" type=\"password\" id=\"password\" name=\"password\" title=\"Eight or more characters\" required><br><br>
+            <input class=\"submitButton\" type=\"submit\" value=\"Submit\" name=\"$submitname\"><br><br>
         </form>";
         return $login;
     }
@@ -17,35 +17,41 @@
     function createuser($action, $submitname)
     {
         $createuser = "
+
+        <div class=\"card\">
+        <br>
         <form action=\"$action\" method=\"POST\">
-            <label name=\"lblFName\"id=\"lblFname\"class=\"\"for=\"fName\">First Name</label>
-            <input type=\"text\"id=\"fName\"name=\"fName\"class=\"\"placeholder=\"First Name\"quired>
+           
+            <label name=\"lblFName\"id=\"lblFname\"class=\"\"for=\"fName\">First Name</label><br>
+            <input type=\"text\"id=\"fName\"name=\"fName\"class=\"inputStyle\"placeholder=\"First Name\"quired>
             <br>   <br>
-            <label name=\"lblLName\"id=\"lblLName\"class=\"\"for=\"lName\">Last Name</label>
-            <input type=\"text\"id=\"lName\"name=\"lName\"class=\"\"placeholder=\"Last Name\"required >
+            <label name=\"lblLName\"id=\"lblLName\"class=\"\"for=\"lName\">Last Name</label><br>
+            <input type=\"text\"id=\"lName\"name=\"lName\"class=\"inputStyle\"placeholder=\"Last Name\"required >
             <br>   <br>
-            <label name=\"lblIdNumber\"id=\"lblIdNumber\"class=\"\"for=\"idNumber\">ID Number</label>
-            <input type=\"text\"id=\"idNumber\"name=\"idNumber\"class=\"\"placeholder=\"ID Number\"required >
+            <label name=\"lblIdNumber\"id=\"lblIdNumber\"class=\"\"for=\"idNumber\">ID Number</label><br>
+            <input type=\"text\"id=\"idNumber\"name=\"idNumber\"class=\"inputStyle\"placeholder=\"ID Number\"required >
             <br>   <br>
-            <label name=\"lblPhone\"id=\"lblPhone\"class=\"\"for=\"phone\">Phone</label>
-            <input type=\"tel\"id=\"phone\"name=\"phone\"class=\"\"placeholder=\"e.g 078 980 0909\" pattern=\"[0]{1}[1-9]{2}[0-9]{3}[0-9]{4}\" required >
+            <label name=\"lblPhone\"id=\"lblPhone\"class=\"\"for=\"phone\">Phone</label><br>
+            <input type=\"tel\"id=\"phone\"name=\"phone\"class=\"inputStyle\"placeholder=\"e.g 078 980 0909\" pattern=\"[0]{1}[1-9]{2}[0-9]{3}[0-9]{4}\" required >
             <br>   <br>
-            <label name=\"lblEmail\"id=\"lblEmail\"class=\"\"for=\"email\">Email</label>
-            <input type=\"email\"id=\"email\"name=\"email\"class=\"\"placeholder=\"Email Address\"  required >
+            <label name=\"lblEmail\"id=\"lblEmail\"class=\"\"for=\"email\">Email</label><br>
+            <input type=\"email\"id=\"email\"name=\"email\"class=\"inputStyle\"placeholder=\"Email Address\"  required >
             <br>   <br>
-            <label name=\"lblPassword1\"id=\"lblPassword1\"class=\"\"for=\"password1\">Enter Password</label>
-            <input type=\"password\"id=\"password\"name=\"password\"class=\"\"placeholder=\"Password\"  title=\"Eight or more characters\" required >
+            <label name=\"lblPassword1\"id=\"lblPassword1\"class=\"\"for=\"password1\">Enter Password</label><br>
+            <input type=\"password\"id=\"password\"name=\"password\"class=\"inputStyle\"placeholder=\"Password\"  title=\"Eight or more characters\" required >
             <br>   <br>
 
-            <label name=\"lblPassword2\"id=\"lblPassword2\"class=\"\"for=\"password2\">Confirm Password</label>
-            <input type=\"password\"id=\"password2\"name=\"password2\"class=\"\"placeholder=\"Password\" title=\"Eight or more characters\" required >
+            <label name=\"lblPassword2\"id=\"lblPassword2\"class=\"\"for=\"password2\">Confirm Password</label><br>
+            <input type=\"password\"id=\"password2\"name=\"password2\"class=\"inputStyle\"placeholder=\"Password\" title=\"Eight or more characters\" required >
             <br>   <br>
-            <label name=\"lblAddress\"id=\"lblAddress\"class=\"\"for=\"address\">Address</label>
+            <label name=\"lblAddress\"id=\"lblAddress\"class=\"\"for=\"address\">Address</label><br>
 
-            <input type=\"text\"id=\"address\"name=\"cAddress\"class=\"\"placeholder=\"Address\"required >
+            <input type=\"text\"id=\"address\"name=\"cAddress\"class=\"inputStyle\"placeholder=\"Address\"required >
             <br>   <br>
-            <input type=\"submit\"name=\"$submitname\"value=\"Submit\">
-        </form>";
+            <input class=\"submitButton\" type=\"submit\"name=\"$submitname\"value=\"Submit\">
+        </form>
+        <br>
+        </div>";
         return $createuser;
     }
 
@@ -61,35 +67,39 @@
         $password = $_SESSION['password'];
         $address = $_SESSION['cAddress'];
         $udpateuser = "
+        <div class=\"card\">
+        <br>
         <form action=\"$action\" method=\"POST\">
-            <label name=\"lblFName\"id=\"lblFname\"class=\"\"for=\"fName\">First Name</label>
-            <input type=\"text\"id=\"fName\"name=\"fName\"class=\"\"placeholder=\"First Name\" value=\"$fName\" required>
+            <label name=\"lblFName\"id=\"lblFname\"class=\"\"for=\"fName\">First Name</label><br>
+            <input type=\"text\"id=\"fName\"name=\"fName\"class=\"inputStyle\"placeholder=\"First Name\" value=\"$fName\" required>
             <br>   <br>
-            <label name=\"lblLName\"id=\"lblLName\"class=\"\"for=\"lName\">Last Name</label>
-            <input type=\"text\"id=\"lName\"name=\"lName\"class=\"\"placeholder=\"Last Name\"value=\"$lName\" required >
+            <label name=\"lblLName\"id=\"lblLName\"class=\"\"for=\"lName\">Last Name</label><br>
+            <input type=\"text\"id=\"lName\"name=\"lName\"class=\"inputStyle\"placeholder=\"Last Name\"value=\"$lName\" required >
             <br>   <br>
-            <label name=\"lblIdNumber\"id=\"lblIdNumber\"class=\"\"for=\"idNumber\">ID Number</label>
-            <input type=\"text\"id=\"idNumber\"name=\"idNumber\"class=\"\"placeholder=\"ID Number\"value=\"$idNumber\" required >
+            <label name=\"lblIdNumber\"id=\"lblIdNumber\"class=\"\"for=\"idNumber\">ID Number</label><br>
+            <input type=\"text\"id=\"idNumber\"name=\"idNumber\"class=\"inputStyle\"placeholder=\"ID Number\"value=\"$idNumber\" required readonly>
             <br>   <br>
-            <label name=\"lblPhone\"id=\"lblPhone\"class=\"\"for=\"phone\">Phone</label>
-            <input type=\"tel\"id=\"phone\"name=\"phone\"class=\"\"placeholder=\"e.g 078 980 0909\"value=\"$phone\" pattern=\"[0]{1}[1-9]{2}[0-9]{3}[0-9]{4}\" required >
+            <label name=\"lblPhone\"id=\"lblPhone\"class=\"\"for=\"phone\">Phone</label><br>
+            <input type=\"tel\"id=\"phone\"name=\"phone\"class=\"inputStyle\"placeholder=\"e.g 078 980 0909\"value=\"$phone\" pattern=\"[0]{1}[1-9]{2}[0-9]{3}[0-9]{4}\" required >
             <br>   <br>
-            <label name=\"lblEmail\"id=\"lblEmail\"class=\"\"for=\"email\">Email</label>
-            <input type=\"email\"id=\"email\"name=\"email\"class=\"\"placeholder=\"Email Address\"value=\"$email\"  required >
+            <label name=\"lblEmail\"id=\"lblEmail\"class=\"\"for=\"email\">Email</label><br>
+            <input type=\"email\"id=\"email\"name=\"email\"class=\"inputStyle\"placeholder=\"Email Address\"value=\"$email\"  required >
             <br>   <br>
-            <label name=\"lblPassword1\"id=\"lblPassword1\"class=\"\"for=\"password1\">Enter Password</label>
-            <input type=\"password\"id=\"password\"name=\"password\"class=\"\"placeholder=\"Password\"value=\"$password\"  title=\"Eight or more characters\" required >
+            <label name=\"lblPassword1\"id=\"lblPassword1\"class=\"\"for=\"password1\">Enter Password</label><br>
+            <input type=\"password\"id=\"password\"name=\"password\"class=\"inputStyle\"placeholder=\"Password\"value=\"$password\"  title=\"Eight or more characters\" required >
             <br>   <br>
 
-            <label name=\"lblPassword2\"id=\"lblPassword2\"class=\"\"for=\"password2\">Confirm Password</label>
-            <input type=\"password\"id=\"password2\"name=\"password2\"class=\"\"placeholder=\"Password\"value=\"$password\" title=\"Eight or more characters\" required >
+            <label name=\"lblPassword2\"id=\"lblPassword2\"class=\"\"for=\"password2\">Confirm Password</label><br>
+            <input type=\"password\"id=\"password2\"name=\"password2\"class=\"inputStyle\"placeholder=\"Password\"value=\"$password\" title=\"Eight or more characters\" required >
             <br>   <br>
-            <label name=\"lblAddress\"id=\"lblAddress\"class=\"\"for=\"address\">Address</label>
+            <label name=\"lblAddress\"id=\"lblAddress\"class=\"\"for=\"address\">Address</label><br>
 
-            <input type=\"text\"id=\"address\"name=\"cAddress\"class=\"\"placeholder=\"Address\"value=\"$address\" required >
+            <input type=\"text\"id=\"address\"name=\"cAddress\"class=\"inputStyle\"placeholder=\"Address\"value=\"$address\" required >
             <br>   <br>
             <input class=\"submitButton\" type=\"submit\"name=\"$submitname\"value=\"Submit\">
-        </form>";
+        </form>
+        <br>
+        </div>";
         return $udpateuser;
 
 

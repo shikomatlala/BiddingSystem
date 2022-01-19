@@ -9,9 +9,16 @@ var selectElClass = "";
 var actionButtonClass = "";
 var txtInputClass = "";
 
+var ageElement = document.getElementById("inputAnimalAge");
+ageElement.addEventListener("change", validateAge);
+
+function validateAge()
+{
+    console.log("changed");
+}
+
 function createAuctionInterface()
 {
-
     var animalTypeArr = new Array();
     var varAnimalType;
     //=====================
@@ -44,9 +51,41 @@ function createAuctionInterface()
     //===============
     var animalBreedDiv = document.getElementById("animalBreedDiv");
     var selectAnimalBreed = createElement("selectAnimalBreed", selectElClass, "selectAnimalBreed", "", "select", "text");
-    selectAnimalBreed.options[selectAnimalBreed.options.length] = new Option("Brahman", "1");
+
+    // console.log(document.getElementById("selectAnimalType").value);
+    // e.preventDefault();
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '')
+    var typeId = 1;
+    console.log(typeId);
+    var params = "typeId=" + typeId;
+    // xhr.open('POST', 'http://localhost/dashboard/biddingsystem/user/auction/createAuction/component/api/getAnimalBreed.php', true);
+    xhr.open('POST', 'http://biddingsystem.bitnamiapp.com/user/my-auctions/create/component/api/getAnimalBreed.php', true);
+
+    //Pass the information - but then again how can we get the request that we are looking for?
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onload = function()
+    {
+        //Get the main div that we are working on    
+        //What do we have here?
+        if(this.status = 200)
+        {
+            var breedArray = JSON.parse(this.responseText);
+
+            var selectAnimalBreed = document.getElementById("selectAnimalBreed");
+            selectAnimalBreed.innerHTML = "";
+            for(var i in breedArray)
+            {
+                //But we need to make an extra row - and then use this extra row to show students that are not grouped.
+                selectAnimalBreed.options[selectAnimalBreed.options.length] = new Option(breedArray[i].name, breedArray[i].breedId);
+            }
+        }
+    }
+    xhr.send(params);
+
+
+    // selectAnimalBreed.options[selectAnimalBreed.options.length] = new Option("Brahman", "1");
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('POST', '')
     animalBreedDiv.appendChild(selectAnimalBreed);
     console.log(selectAnimalBreed);
 }
